@@ -1,0 +1,127 @@
+CHEMBL520419
+                    3D
+ Structure written by MMmdl.
+ 15 16  0  0  1  0            999 V2000
+    2.4014    6.8995    0.1894 C   0  0  0  0  0  0
+    1.2016    7.2877   -0.4320 C   0  0  0  0  0  0
+    0.1519    6.4005   -0.7067 C   0  0  0  0  0  0
+    2.5836    5.5604    0.5591 C   0  0  0  0  0  0
+    1.5617    4.6397    0.3009 C   0  0  0  0  0  0
+    0.3701    5.0733   -0.3236 C   0  0  0  0  0  0
+   -0.3821    3.9248   -0.4108 N   0  0  0  0  0  0
+    0.3498    2.8914    0.1347 C   0  0  0  0  0  0
+    1.5213    3.2970    0.5699 N   0  0  0  0  0  0
+    1.0644    8.3235   -0.7067 H   0  0  0  0  0  0
+    3.5002    5.2379    1.0320 H   0  0  0  0  0  0
+   -1.3092    3.8034   -0.7911 H   0  0  0  0  0  0
+   -0.0628    1.8937    0.1632 H   0  0  0  0  0  0
+    3.1791    7.6236    0.3823 H   0  0  0  0  0  0
+   -0.7480    6.7598   -1.1837 H   0  0  0  0  0  0
+  1  4  1  0  0  0
+  1  2  2  0  0  0
+  1 14  1  0  0  0
+  2  3  1  0  0  0
+  2 10  1  0  0  0
+  3  6  2  0  0  0
+  3 15  1  0  0  0
+  4  5  2  0  0  0
+  4 11  1  0  0  0
+  5  9  1  0  0  0
+  5  6  1  0  0  0
+  6  7  1  0  0  0
+  7  8  1  0  0  0
+  7 12  1  0  0  0
+  8  9  2  0  0  0
+  8 13  1  0  0  0
+M  END
+> <s_m_entry_id>
+1067
+
+> <s_m_entry_name>
+active.5
+
+> <s_m_Source_Path>
+/home/dsoler
+
+> <s_m_Source_File>
+active.sdf
+
+> <i_m_Source_File_Index>
+5
+
+> <s_ppw_group_name_backup>
+active-imp1
+
+> <s_ppw_entry_id_backup>
+6
+
+> <b_ppw_prepared>
+1
+
+> <b_ppw_assigned_bond_orders>
+1
+
+> <b_ppw_added_hydrogens>
+1
+
+> <b_ppw_treated_metals>
+1
+
+> <b_ppw_created_disulfur>
+1
+
+> <b_ppw_deleted_far_waters>
+1
+
+> <i_lp_mmshare_version>
+36015
+
+> <i_f3d_flags>
+0
+
+> <r_epik_Ionization_Penalty>
+  0.0016
+
+> <r_epik_Ionization_Penalty_Charging>
+  0.0000
+
+> <r_epik_Ionization_Penalty_Neutral>
+  0.0016
+
+> <r_epik_State_Penalty>
+  0.4467
+
+> <r_epik_Charging_Adjusted_Penalty>
+0.446682681074111
+
+> <i_epik_Tot_Q>
+0
+
+> <i_epik_Tot_abs_Q>
+0
+
+> <s_lp_Force_Field>
+OPLS3
+
+> <r_lp_Energy>
+49.0873256930983
+
+> <b_lp_Chiralities_Consistent>
+1
+
+> <s_lp_Variant>
+CHEMBL520419-2
+
+> <s_m_job_name>
+ligprep_2
+
+> <s_m_subgroup_title>
+active
+
+> <s_m_subgroupid>
+active-imp2
+
+> <b_m_subgroup_collapsed>
+0
+
+$$$$

@@ -1,0 +1,123 @@
+CHEMBL520419
+                    3D
+ Structure written by MMmdl.
+ 12 12  0  0  1  0            999 V2000
+   -0.4147    1.4621   -0.0093 C   0  0  0  0  0  0
+    0.2925    0.4114   -0.5450 C   0  0  0  0  0  0
+   -0.4249   -0.8413   -0.7936 C   0  0  0  0  0  0
+   -1.7303   -0.8949   -0.4791 C   0  0  0  0  0  0
+   -2.4222    0.1481    0.0595 N   0  0  0  0  0  0
+   -1.8515    1.3545    0.3307 C   0  0  0  0  0  0
+   -2.5325    2.2531    0.8251 O   0  0  0  0  0  0
+    0.0627   -1.7063   -1.2171 H   0  0  0  0  0  0
+   -2.3548   -1.7651   -0.6188 H   0  0  0  0  0  0
+   -3.4021    0.0571    0.2848 H   0  0  0  0  0  0
+    1.3429    0.5256   -0.7685 H   0  0  0  0  0  0
+    0.0775    2.4053    0.1767 H   0  0  0  0  0  0
+  1  2  2  0  0  0
+  1  6  1  0  0  0
+  1 12  1  0  0  0
+  2  3  1  0  0  0
+  2 11  1  0  0  0
+  3  4  2  0  0  0
+  3  8  1  0  0  0
+  4  5  1  0  0  0
+  4  9  1  0  0  0
+  5  6  1  0  0  0
+  5 10  1  0  0  0
+  6  7  2  0  0  0
+M  END
+> <s_m_entry_id>
+1058
+
+> <s_m_entry_name>
+active.4
+
+> <s_m_Source_Path>
+/home/dsoler
+
+> <s_m_Source_File>
+active.sdf
+
+> <i_m_Source_File_Index>
+4
+
+> <s_ppw_group_name_backup>
+active-imp1
+
+> <s_ppw_entry_id_backup>
+6
+
+> <b_ppw_prepared>
+1
+
+> <b_ppw_assigned_bond_orders>
+1
+
+> <b_ppw_added_hydrogens>
+1
+
+> <b_ppw_treated_metals>
+1
+
+> <b_ppw_created_disulfur>
+1
+
+> <b_ppw_deleted_far_waters>
+1
+
+> <i_lp_mmshare_version>
+36015
+
+> <i_f3d_flags>
+0
+
+> <r_lp_tautomer_probability>
+0.999206294981429
+
+> <r_epik_Ionization_Penalty>
+  0.0014
+
+> <r_epik_Ionization_Penalty_Charging>
+  0.0000
+
+> <r_epik_Ionization_Penalty_Neutral>
+  0.0014
+
+> <r_epik_State_Penalty>
+  0.3776
+
+> <r_epik_Charging_Adjusted_Penalty>
+0.377591332184276
+
+> <i_epik_Tot_Q>
+0
+
+> <i_epik_Tot_abs_Q>
+0
+
+> <s_lp_Force_Field>
+OPLS3
+
+> <r_lp_Energy>
+49.4262263173585
+
+> <b_lp_Chiralities_Consistent>
+1
+
+> <s_lp_Variant>
+CHEMBL520419-1
+
+> <s_m_job_name>
+ligprep_2
+
+> <s_m_subgroup_title>
+active
+
+> <s_m_subgroupid>
+active-imp1
+
+> <b_m_subgroup_collapsed>
+0
+
+$$$$

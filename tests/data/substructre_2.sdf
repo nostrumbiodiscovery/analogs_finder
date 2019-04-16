@@ -1,0 +1,123 @@
+CHEMBL1222883
+                    3D
+ Structure written by MMmdl.
+ 12 12  0  0  1  0            999 V2000
+    2.0468   -0.7442   -0.8251 C   0  0  0  0  0  0
+    2.7847    0.1801   -1.5696 C   0  0  0  0  0  0
+    3.2747   -0.1560   -2.8266 C   0  0  0  0  0  0
+    3.0370   -1.4232   -3.3493 C   0  0  0  0  0  0
+    2.3079   -2.3751   -2.6232 C   0  0  0  0  0  0
+    1.8117   -2.0299   -1.3489 C   0  0  0  0  0  0
+    0.9098   -3.1850   -0.4155 Cl  0  0  0  0  0  0
+    2.9738    1.1695   -1.1785 H   0  0  0  0  0  0
+    3.8389    0.5672   -3.3973 H   0  0  0  0  0  0
+    3.4297   -1.6554   -4.3283 H   0  0  0  0  0  0
+    1.6608   -0.4705    0.1457 H   0  0  0  0  0  0
+    2.1336   -3.3556   -3.0411 H   0  0  0  0  0  0
+  1  2  2  0  0  0
+  1  6  1  0  0  0
+  1 11  1  0  0  0
+  2  3  1  0  0  0
+  2  8  1  0  0  0
+  3  4  2  0  0  0
+  3  9  1  0  0  0
+  4  5  1  0  0  0
+  4 10  1  0  0  0
+  5  6  2  0  0  0
+  5 12  1  0  0  0
+  6  7  1  0  0  0
+M  END
+> <s_m_entry_id>
+1052
+
+> <s_m_entry_name>
+active.3
+
+> <s_m_Source_Path>
+/home/dsoler
+
+> <s_m_Source_File>
+active.sdf
+
+> <i_m_Source_File_Index>
+3
+
+> <s_ppw_group_name_backup>
+active-imp1
+
+> <s_ppw_entry_id_backup>
+5
+
+> <b_ppw_prepared>
+1
+
+> <b_ppw_assigned_bond_orders>
+1
+
+> <b_ppw_added_hydrogens>
+1
+
+> <b_ppw_treated_metals>
+1
+
+> <b_ppw_created_disulfur>
+1
+
+> <b_ppw_deleted_far_waters>
+1
+
+> <i_lp_mmshare_version>
+36015
+
+> <i_f3d_flags>
+0
+
+> <r_lp_tautomer_probability>
+1
+
+> <r_epik_Ionization_Penalty>
+  0.0000
+
+> <r_epik_Ionization_Penalty_Charging>
+  0.0000
+
+> <r_epik_Ionization_Penalty_Neutral>
+  0.0000
+
+> <r_epik_State_Penalty>
+  0.0000
+
+> <r_epik_Charging_Adjusted_Penalty>
+0
+
+> <i_epik_Tot_Q>
+0
+
+> <i_epik_Tot_abs_Q>
+0
+
+> <s_lp_Force_Field>
+OPLS3
+
+> <r_lp_Energy>
+21.3467613296731
+
+> <b_lp_Chiralities_Consistent>
+1
+
+> <s_lp_Variant>
+CHEMBL1222883-1
+
+> <s_m_job_name>
+ligprep_2
+
+> <s_m_subgroup_title>
+active
+
+> <s_m_subgroupid>
+active
+
+> <b_m_subgroup_collapsed>
+0
+
+$$$$
