@@ -75,7 +75,7 @@ Phase Screening
 
     - **Example**
 
-        python -m analogs_finder.rank_method.phase --database <database (sdf)> --query_molec <1 sdf molecule> 
+        python -m analogs_finder.rank_method.phase --database <database (sdf)> --query_molec <1 sdf molecule> --nominimization --match 4 (match 4 out of total pharmacophores)
 
 
         python -m analogs_finder.rank_method.phase --database analogs_finder/examples/active.sdf --query_molec analogs_finder.main/examples/substructre_1.py
