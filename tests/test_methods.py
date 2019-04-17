@@ -2,6 +2,7 @@ import pytest
 import os
 import glob
 from analogs_finder import main as an
+from analogs_finder.rank_methods import phase as ps
 
 DIR = os.path.dirname(__file__)
 RESULT_TRESH=1
@@ -28,3 +29,6 @@ def test_similar(molecule=MOLECULE, db=DB, result=RESULT_SIMILAR):
 
 def test_substructure(molecule=MOLECULE, db=DB, result=RESULT_SUBSTRUCTURE):
     output = an.query_database(db, molecule, substructure=True)
+
+def test_glide(molecule=MOLECULE, db=DB):
+    ps.run_phase_screen(molecule, db)
