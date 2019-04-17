@@ -24,7 +24,7 @@ class PhaseScreen():
     def run(self, schr=cs.SCHR, output_project="query_molec_phase", minimization=True, match=None):
         assert hasattr(self, "hypotesis"), "create_pharmacophore_hypotesis must be run before phase screening"
         phase_bin = os.path.join(schr, "phase_screen")
-        command = "{} {} {} {}".format(phase_bin, self.database, self.hypotesis, output_project)
+        command = "{} {} {} {} -flex".format(phase_bin, self.database, self.hypotesis, output_project)
         if minimization:
             command += " -force_field OPLS3e "
         if match:
