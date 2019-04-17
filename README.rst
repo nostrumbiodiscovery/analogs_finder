@@ -63,3 +63,19 @@ Command to search for at least one of the substructures in each sdf file
 
 
          python -m analogs_finder.main  analogs_finder/examples/active.sdf analogs_finder.main/examples/substructre_* --output most_similars.sdf --combi_subsearch
+
+
+Phase Screening
+--------------------
+
+
+    - **Explanation**
+
+       Given a query molecule and a database, build pharmacophore hypotesis from the query molecule and screen the database to match this hypotesis.
+
+    - **Example**
+
+        python -m analogs_finder.rank_method.phase --database <database (sdf)> --query_molec <1 sdf molecule> 
+
+
+        python -m analogs_finder.rank_method.phase --database analogs_finder/examples/active.sdf --query_molec analogs_finder.main/examples/substructre_1.py
