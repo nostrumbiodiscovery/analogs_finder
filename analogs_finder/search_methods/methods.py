@@ -29,21 +29,28 @@ def search_similarity_tresh(molecule_query, molecules_db, treshold):
 
 def search_substructure(molecule_query, molecules_db):
     print("Searching for substructure")
-    for m in tqdm(molecules_db):
+    all_substructs_found = True
+    for i, m in tqdm(enumerate(molecules_db)):
+        if not m:
+            print("Skipping {}".format(i))
+            continue
         all_substructs_found = True
         for m_ref in molecule_query:
-            if not m.HasSubstructMatch(m_ref):
+            if not m.HasSubstructMatch(m_ref, useChirality=True):
                 all_substructs_found = False
         if all_substructs_found:
             yield m
 
 def combi_substructure_search(sdfs, molecules_db):
     print("Searching for substructure")
-    for m in tqdm(molecules_db):
+    for i, m in tqdm(enumerate(molecules_db)):
+        if not m:
+            print("Skipping {}".format(i))
+            continue
         substructs_found = [False] * len(sdfs)
         for i, sdf in enumerate(sdfs):
             for m_ref in Chem.SDMolSupplier(sdf):
-                if m.HasSubstructMatch(m_ref):
+                if m.HasSubstructMatch(m_ref, useChirality=True):
                     substructs_found[i] = True
         if all(substructs_found):
             yield m

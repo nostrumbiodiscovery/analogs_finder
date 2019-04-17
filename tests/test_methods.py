@@ -9,7 +9,7 @@ RESULT_COMBI_SEARCH=2
 RESULT_SIMILAR=4
 RESULT_SUBSTRUCTURE=2
 
-MOLECULE = os.path.join(DIR, "data/substructre_1.sdf")
+MOLECULE = [os.path.join(DIR, "data/substructre_1.sdf"), ]
 MOLECULES = glob.glob(os.path.join(DIR, "data/substructre_*.sdf"))
 DB = os.path.join(DIR, "data/database.sdf")
 
