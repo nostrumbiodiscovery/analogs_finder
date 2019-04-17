@@ -13,6 +13,7 @@ RESULT_SUBSTRUCTURE=2
 MOLECULE = os.path.join(DIR, "data/substructre_1.sdf")
 MOLECULES = glob.glob(os.path.join(DIR, "data/substructre_*.sdf"))
 DB = os.path.join(DIR, "data/database.sdf")
+HYPO = os.path.join(DIR, "data/substructre_1.phypo")
 
 def test_tresh(molecule=MOLECULE, db=DB, result=RESULT_TRESH):
     output = an.query_database(db, molecule, treshold=0.45)
@@ -30,5 +31,8 @@ def test_similar(molecule=MOLECULE, db=DB, result=RESULT_SIMILAR):
 def test_substructure(molecule=MOLECULE, db=DB, result=RESULT_SUBSTRUCTURE):
     output = an.query_database(db, molecule, substructure=True)
 
-def test_glide(molecule=MOLECULE, db=DB):
+def test_phase(molecule=MOLECULE, db=DB):
     ps.run_phase_screen(molecule, db)
+
+def test_phasei_external_hypo(molecule=MOLECULE, db=DB, hypotesis=HYPO):
+    ps.run_phase_screen(molecule, db, hypotesis=HYPO)

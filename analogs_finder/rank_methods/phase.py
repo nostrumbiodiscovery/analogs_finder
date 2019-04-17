@@ -29,16 +29,20 @@ class PhaseScreen():
         os.system(command)
             
 
-def run_phase_screen(query_mol, database):
+def run_phase_screen(query_mol, database, hypotesis=None):
     print("\n")
     print("Pharmacophore Screening")
     print("------------------------\n")
     print("Input query file: {}".format(query_mol))
     print("Database to screen: {}".format(database))
+    print("Initial hypotesis: {}".format(hypotesis))
     print("\n")
     query_mol_mae = ft.sdf_to_mae(query_mol)
     phase = PhaseScreen(query_mol_mae, database)
-    phase.create_pharmacophore_hypotesis()
+    if hypotesis:
+        phase.hypotesis = hypotesis
+    else:
+        phase.create_pharmacophore_hypotesis()
     phase.run()
     
 
@@ -47,10 +51,12 @@ def parse_args(parser):
                         help='Reference molecule to create pharmacophores from')
     parser.add_argument('--database', type=str,
                         help='Database for pharmacophore screening')
+    parser.add_argument('--hypotesis', type=str,
+                        help='Hypotesis file (.phypo)', default=None)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Pharmacophore Screening')
     parse_args(parser)
     args = parser.parse_args()
-    run_phase_screen(args.query_molec, args.database)
+    run_phase_screen(args.query_molec, args.database, hypotesis=args.hypotesis)
     
