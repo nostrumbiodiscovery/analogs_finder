@@ -16,3 +16,4 @@ before_install:
 install:
   - conda install --use-local -c conda-forge rdkit
 
+script: pytest
