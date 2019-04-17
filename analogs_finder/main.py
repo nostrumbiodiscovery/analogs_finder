@@ -22,13 +22,13 @@ def query_database(database, molecules, n_structs=500, combi_subsearch=False, mo
 
     # Query Molecule
     if most_similars:
-        molecule_query = Chem.SDMolSupplier(molecules[0]).next()
+        molecule_query = next(Chem.SDMolSupplier(molecules[0]))
     elif combi_subsearch:
         molecule_query = molecules
     elif substructure:
         molecule_query = Chem.SDMolSupplier(molecules[0])
     elif treshold:
-        molecule_query = Chem.SDMolSupplier(molecules[0]).next()
+        molecule_query = next(Chem.SDMolSupplier(molecules[0]))
 
     # Method to use
     mol_most_similars = None
