@@ -2,6 +2,19 @@ Description
 ##############
 This script is intended to retrieve analogs given a query molecule (sdf) and a database (sdf).
 
+Installation
+##############
+
+1) pip install analogs_finder
+
+2) export SCHRODINGER=/opt/schrodinger2019-1/
+
+3) Use it freely!
+
+
+Functionalities
+################
+
 
 Command for n most similar structures:
 ---------------------------------------
