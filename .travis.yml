@@ -14,7 +14,7 @@ before_install:
 
 # Install packages
 install:
-  - pip install -r requirements.txt
+  - conda install ..use-local -c conda-forge tqdm 
   - conda install --use-local -c conda-forge rdkit
 
 script: pytest tests/test_methods.py
