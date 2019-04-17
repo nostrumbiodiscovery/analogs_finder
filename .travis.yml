@@ -8,15 +8,14 @@ before_install:
   - chmod +x miniconda.sh
   - ./miniconda.sh -b
   - export PATH=$PATH:$HOME/miniconda2/bin
+  - export PYTHONPATH=$PYTHONPATH:$HOME/miniconda2/lib/python2.7/site-packages/
   - conda update --yes -q conda
   - conda config --set always_yes true
   - conda config --set anaconda_upload no
-  - conda create -n analogs_finder_env python=3.4
-  - source activate analogs_finder_env
 
 # Install packages
 install:
-  - conda install --use-local -c conda-forge tqdm 
+  - pip3 install -r requirements.txt
   - conda install --use-local -c conda-forge rdkit
 
 script: python -m pytest tests/test_methods.py
