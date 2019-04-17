@@ -34,5 +34,8 @@ def test_substructure(molecule=MOLECULE, db=DB, result=RESULT_SUBSTRUCTURE):
 def test_phase(molecule=MOLECULE, db=DB):
     ps.run_phase_screen(molecule, db)
 
-def test_phasei_external_hypo(molecule=MOLECULE, db=DB, hypotesis=HYPO):
+def test_phase_external_hypo(molecule=MOLECULE, db=DB, hypotesis=HYPO):
     ps.run_phase_screen(molecule, db, hypotesis=HYPO)
+
+def test_phase_no_minimization(molecule=MOLECULE, db=DB, hypotesis=HYPO):
+    ps.run_phase_screen(molecule, db, hypotesis=HYPO, minimization=False)
