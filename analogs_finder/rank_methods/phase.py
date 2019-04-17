@@ -1,7 +1,6 @@
 import os
 import argparse
 from analogs_finder.helpers import formats as ft
-from analogs_finder.constants import constants as cs
 
 
 
@@ -12,8 +11,8 @@ class PhaseScreen():
         self.database = database
 
     
-    def create_pharmacophore_hypotesis(self, schr=cs.SCHR, output="query_molec.phypo"):
-        hypotesis_bin =  os.path.join(schr, "utilities/create_hypoFiles")
+    def create_pharmacophore_hypotesis(self, output="query_molec.phypo"):
+        hypotesis_bin =  os.path.join(os.environ["SCHRODINGER"], "utilities/create_hypoFiles")
         project_name = output.split(".")[:-1]
         command = "{} {} {} > /dev/null".format(hypotesis_bin, self.query_mol, project_name[0])
         print(command)
@@ -21,9 +20,9 @@ class PhaseScreen():
         self.hypotesis = output
         return self.hypotesis 
    
-    def run(self, schr=cs.SCHR, output_project="query_molec_phase", minimization=True, match=None):
+    def run(self, output_project="query_molec_phase", minimization=True, match=None):
         assert hasattr(self, "hypotesis"), "create_pharmacophore_hypotesis must be run before phase screening"
-        phase_bin = os.path.join(schr, "phase_screen")
+        phase_bin = os.path.join(os.environ["SCHRODINGER"], "phase_screen")
         command = "{} {} {} {} -flex".format(phase_bin, self.database, self.hypotesis, output_project)
         if minimization:
             command += " -force_field OPLS3e "
