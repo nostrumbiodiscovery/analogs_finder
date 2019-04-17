@@ -7,14 +7,15 @@ before_install:
   - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
   - chmod +x miniconda.sh
   - ./miniconda.sh -b
-  - export PATH=$HOME/miniconda2/bin:$PATH
+  - export PATH=$PATH:$HOME/miniconda2/bin
   - conda update --yes -q conda
   - conda config --set always_yes true
   - conda config --set anaconda_upload no
 
 # Install packages
 install:
+  - pip3 install -r requirements.txt
   - conda install --use-local -c conda-forge tqdm 
   - conda install --use-local -c conda-forge rdkit
 
-script: pytest tests/test_methods.py
+script: python3 -m pytest tests/test_methods.py
