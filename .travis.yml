@@ -14,6 +14,7 @@ before_install:
 
 # Install packages
 install:
+  - pip install -r requirements.txt
   - conda install --use-local -c conda-forge rdkit
 
-script: pytest
+script: pytest test/test_methods.py
