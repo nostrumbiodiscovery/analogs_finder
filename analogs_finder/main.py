@@ -14,6 +14,9 @@ from analogs_finder.search_methods import methods as mt
 
 def query_database(database, molecules, n_structs=500, combi_subsearch=False, most_similars=False, substructure=False, output="similars.sdf", treshold=0.7):
 
+    assert type(database) == str, "database must be a unique sdf file"
+    assert type(molecules) == list, "query molecule must be a list of a single or multiple sdf files"
+
     # Database
     molecules_db= Chem.SDMolSupplier(database)
 
