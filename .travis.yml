@@ -11,11 +11,12 @@ before_install:
   - conda update --yes -q conda
   - conda config --set always_yes true
   - conda config --set anaconda_upload no
+  - conda create -n analogs_finder_env python=3.4
+  - source activate analogs_finder_env
 
 # Install packages
 install:
-  - pip3 install -r requirements.txt
   - conda install --use-local -c conda-forge tqdm 
   - conda install --use-local -c conda-forge rdkit
 
-script: python3 -m pytest tests/test_methods.py
+script: python -m pytest tests/test_methods.py
