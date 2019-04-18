@@ -18,6 +18,7 @@ before_install:
  - conda update -q conda
 
  # install essentials for deployment
+ - conda install -f  setuptools
  - conda install -q conda-build
  - conda install -q anaconda-client
 
