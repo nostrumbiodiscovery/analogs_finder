@@ -16,6 +16,11 @@ before_install:
  - hash -r
  - conda config --set always_yes yes --set changeps1 no
  - conda update -q conda
+
+ # install essentials for deployment
+ - conda install -q conda-build
+ - conda install -q anaconda-client
+
  # Useful for debugging any issues with conda
  - conda info -a
 
@@ -24,14 +29,12 @@ before_install:
  - source activate tenv
 
 install:
+ # Necessary dependencies
  - conda install -q tqdm numpy pytest
 
- # install the most recent rdkit package from the RDKit anaconda channel.
+ # Install the most recent rdkit package from the RDKit anaconda channel.
  - conda install -q -c rdkit rdkit
 
- # install libraries for deployment
- - conda install -q conda-build
- - conda install -q anaconda-client
 
 before_script:
  # RDKit
