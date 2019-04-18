@@ -38,6 +38,9 @@ script:
  # Run tests
  - python -m pytest tests/test_methods.py
 
+before_deploy:
+- conda install -q anaconda-client
+
 deploy:
   # Deploy to Anaconda.org
   - provider: script
