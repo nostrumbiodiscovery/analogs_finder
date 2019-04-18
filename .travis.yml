@@ -24,7 +24,7 @@ before_install:
  - source activate tenv
 
 install:
- - conda install -q tqdm numpy
+ - conda install -q tqdm numpy pytest
 
  # install the most recent rdkit package from the RDKit anaconda channel.
  - conda install -q -c rdkit rdkit
