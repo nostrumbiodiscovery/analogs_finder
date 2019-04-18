@@ -46,6 +46,7 @@ script:
  - python -m pytest tests/test_methods.py
 
 before_deploy:
+- conda install setuptools
 - conda build conda_recipe -c local
 
 deploy:
