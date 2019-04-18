@@ -53,7 +53,8 @@ before_deploy:
 
 deploy:
   # Deploy to Anaconda.org
-  - script: anaconda -t $CONDA_UPLOAD_TOKEN  upload -u NostrumBioDiscovery $HOME/conda/conda-bld/**/analogs_finder-*.tar.bz2
+    provider: script
+    script: anaconda -t $CONDA_UPLOAD_TOKEN  upload -u NostrumBioDiscovery $HOME/conda/conda-bld/**/analogs_finder-*.tar.bz2
     skip_cleanup: true
     on:
 tags: true
