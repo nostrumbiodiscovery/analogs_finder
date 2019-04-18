@@ -29,6 +29,10 @@ install:
  # install the most recent rdkit package from the RDKit anaconda channel.
  - conda install -q -c rdkit rdkit
 
+ # install libraries for deployment
+ - conda install -q conda-build
+ - conda install -q anaconda-client
+
 before_script:
  # RDKit
  - export RDBASE=$CONDA_PREFIX/Library/share/RDKit
@@ -39,9 +43,7 @@ script:
  - python -m pytest tests/test_methods.py
 
 before_deploy:
-- conda install -q conda conda-build
 - conda build conda_recipe -c local
-- conda install -q anaconda-client
 
 deploy:
   # Deploy to Anaconda.org
