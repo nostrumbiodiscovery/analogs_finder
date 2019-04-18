@@ -39,6 +39,7 @@ script:
  - python -m pytest tests/test_methods.py
 
 before_deploy:
+- conda install -q conda conda-build
 - conda build conda_recipe -c local
 - conda install -q anaconda-client
 
