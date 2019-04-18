@@ -37,3 +37,11 @@ before_script:
 script:
  # Run tests
  - python -m pytest tests/test_methods.py
+
+deploy:
+  # Deploy to Anaconda.org
+  - provider: script
+    script: anaconda -t $ANACONDA_TOKEN upload -u NostrumBioDiscovery $HOME/conda/conda-bld/**/analogs_finder-*.tar.bz2
+    skip_cleanup: true
+    on:
+tags: true
