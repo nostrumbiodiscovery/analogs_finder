@@ -1,3 +1,10 @@
+Analogs Finder
+##############
+
+.. image:: https://travis-ci.com/danielSoler93/analogs_finder.svg?branch=master
+       :target: https://travis-ci.com/danielSoler93/analogs_finder
+
+
 Description
 ##############
 This script is intended to retrieve analogs given a query molecule (sdf) and a database (sdf).
