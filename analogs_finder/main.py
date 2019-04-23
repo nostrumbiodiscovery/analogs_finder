@@ -9,6 +9,7 @@ from rdkit import DataStructs
 from rdkit.Chem.Fingerprints import FingerprintMols
 from multiprocessing import Pool
 from analogs_finder.search_methods import methods as mt
+from analogs_finder.helpers import helpers as hp
 
 
 
@@ -42,9 +43,10 @@ def query_database(database, molecules, n_structs=500, combi_subsearch=False, mo
         mol_most_similars  = mt.search_similarity_tresh(molecule_query, molecules_db, treshold)
         
     if mol_most_similars:
+        mol_most_similars_clean = hp.remove_duplicates(mol_most_similars)
         w = Chem.SDWriter(output)
         n_mol_found = 0
-        for m in mol_most_similars: 
+        for m in mol_most_similars_clean: 
             w.write(m)
             n_mol_found += 1
         print("Number of found molecules {}".format(n_mol_found))
