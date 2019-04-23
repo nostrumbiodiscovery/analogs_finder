@@ -13,7 +13,7 @@ from analogs_finder.helpers import helpers as hp
 
 
 
-def query_database(database, molecules, n_structs=500, combi_subsearch=False, most_similars=False, substructure=False, output="similars.sdf", treshold=0.7):
+def query_database(database, molecules, n_structs=500, combi_subsearch=False, most_similars=False, substructure=False, output="similars.sdf", treshold=0.7, allow_repetition=True):
 
     assert type(database) == str, "database must be a unique sdf file"
     assert type(molecules) == list, "query molecule must be a list of a single or multiple sdf files"
@@ -43,10 +43,11 @@ def query_database(database, molecules, n_structs=500, combi_subsearch=False, mo
         mol_most_similars  = mt.search_similarity_tresh(molecule_query, molecules_db, treshold)
         
     if mol_most_similars:
-        mol_most_similars_clean = hp.remove_duplicates(mol_most_similars)
+        if not allow_repetition:
+            mol_most_similars = hp.remove_duplicates(mol_most_similars)
         w = Chem.SDWriter(output)
         n_mol_found = 0
-        for m in mol_most_similars_clean: 
+        for m in mol_most_similars: 
             w.write(m)
             n_mol_found += 1
         print("Number of found molecules {}".format(n_mol_found))
@@ -65,10 +66,11 @@ def add_args(parser):
     parser.add_argument('--sb', action="store_true", help="Get the n most similar structs")
     parser.add_argument('--substructure', action="store_true", help="Get all the structures with a certain substructure")
     parser.add_argument('--combi_subsearch', action="store_true", help="Get almost on of the substructures in each sdf file")
+    parser.add_argument('--allow_repetition', action="store_true", help="Allow to have the same molecule name several times in the final sdf file")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Build 2D QSAR model')
     add_args(parser)
     args = parser.parse_args()
     query_database(args.database, args.molecules, n_structs=args.n, most_similars=args.sb, 
-          combi_subsearch=args.combi_subsearch, substructure=args.substructure, output=args.output, treshold=args.tresh)
+          combi_subsearch=args.combi_subsearch, substructure=args.substructure, output=args.output, treshold=args.tresh, allow_repetition=args.allow_repetition)

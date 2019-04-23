@@ -45,7 +45,7 @@ before_script:
 
 script:
  # Run tests
- - python -m pytest tests/test_methods.py
+ - python -m pytest tests/test_methods.py tests/test_helpers.py
 
 before_deploy:
 - conda install -f  setuptools
