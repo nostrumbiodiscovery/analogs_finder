@@ -9,7 +9,7 @@ setuptools.setup(name='analogs_finder',
                substructure search, multi substructure search',
       author='Daniel Soler',
       author_email='daniel.soler@nostrumbiodiscovery.com',
-      install_requires=[],
+      install_requires=["tqdm", "numpy"],
       packages=setuptools.find_packages(),
       classifiers=[
          "Programming Language :: Python3",
