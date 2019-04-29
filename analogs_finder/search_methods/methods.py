@@ -65,3 +65,15 @@ def compute_similarity(mref, molecules):
             yield DataStructs.FingerprintSimilarity(fp_ref, fp), m
         else:
             print("Molecule {}".format(i))
+
+def most_similar_with_substructure(molecule_query, molecules_db, substructures, treshold):
+    for s, m in tqdm(compute_similarity(molecule_query, molecules_db)):
+        # Similarity based
+        if s > treshold:
+            for substruct in Chem.SDMolSupplier(substructures):
+                # Substructure based
+                if m.HasSubstructMatch(substruct, useChirality=True):
+                    m.SetProp("Similarity", str(s))
+                    yield m
+
+    
