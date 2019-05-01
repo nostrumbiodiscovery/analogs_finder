@@ -29,5 +29,5 @@ https://danielsoler93.github.io/analogs_finder/tutorial/index.html
 To use from Command Line
 #############################
 
-https://danielsoler93.github.io/analogs_finder/command_line_tutorial/index.html
+https://danielsoler93.github.io/analogs_finder/tutorial/command_line_tutorial/index.html
 
