@@ -13,7 +13,7 @@ from analogs_finder.helpers import helpers as hp
 
 
 
-def query_database(database, molecules, n_structs=500, combi_subsearch=False, most_similars=False, substructure=False, output="similars.sdf", hybrid=None, treshold=0.7, allow_repetition=True):
+def query_database(database, molecules, n_structs=500, combi_subsearch=False, most_similars=False, substructure=False, output="similars.sdf", hybrid=None, treshold=0.7, allow_repetition=True, fp_type="DL"):
 
     assert type(database) == str, "database must be a unique sdf file"
     assert type(molecules) == list, "query molecule must be a list of a single or multiple sdf files"
@@ -36,15 +36,15 @@ def query_database(database, molecules, n_structs=500, combi_subsearch=False, mo
     # Method to use
     mol_most_similars = None
     if most_similars:
-        mol_most_similars  = mt.search_most_similars(molecule_query, molecules_db, n_structs)
+        mol_most_similars  = mt.search_most_similars(molecule_query, molecules_db, n_structs, fp_type=fp_type)
     elif substructure:
         mol_most_similars  = mt.search_substructure(molecule_query, molecules_db)
     elif combi_subsearch:
         mol_most_similars = mt.combi_substructure_search(molecule_query, molecules_db) 
     elif hybrid and treshold:
-        mol_most_similars = mt.most_similar_with_substructure(molecule_query, molecules_db, hybrid, treshold)
+        mol_most_similars = mt.most_similar_with_substructure(molecule_query, molecules_db, hybrid, treshold, fp_type=fp_type)
     elif treshold:
-        mol_most_similars  = mt.search_similarity_tresh(molecule_query, molecules_db, treshold)
+        mol_most_similars  = mt.search_similarity_tresh(molecule_query, molecules_db, treshold, fp_type=fp_type)
         
     if mol_most_similars:
         if not allow_repetition:
@@ -72,10 +72,11 @@ def add_args(parser):
     parser.add_argument('--combi_subsearch', action="store_true", help="Get almost on of the substructures in each sdf file")
     parser.add_argument('--allow_repetition', action="store_true", help="Allow to have the same molecule name several times in the final sdf file")
     parser.add_argument('--hybrid', type=str, help="Hybird model between similarity and substructure search")
+    parser.add_argument('--fp_type', type=str, help="Fingerprint type to use [DL, circular, torsions, MACCS]")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Build 2D QSAR model')
     add_args(parser)
     args = parser.parse_args()
     query_database(args.database, args.molecules, n_structs=args.n, most_similars=args.sb, 
-          combi_subsearch=args.combi_subsearch, substructure=args.substructure, output=args.output, treshold=args.tresh, allow_repetition=args.allow_repetition, hybrid=args.hybrid)
+          combi_subsearch=args.combi_subsearch, substructure=args.substructure, output=args.output, treshold=args.tresh, allow_repetition=args.allow_repetition, hybrid=args.hybrid, fp_type=args.fp_type)
