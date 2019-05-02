@@ -24,15 +24,15 @@
 
   
 
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="ChangeLog" href="../../changelog/index.html" />
-    <link rel="prev" title="From python API" href="../api_tutorial/index.html" /> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ChangeLog" href="../changelog/index.html" />
+    <link rel="prev" title="Getting Started" href="../tutorial/index.html" /> 
 
   
-  <script src="../../_static/js/modernizr.min.js"></script>
+  <script src="../_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -48,7 +48,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> analogs finder
+            <a href="../index.html" class="icon icon-home"> analogs finder
           
 
           
@@ -65,7 +65,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -83,25 +83,23 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../installation/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Getting Started</a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Getting Started</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../api_tutorial/index.html">From python API</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">From Command Line</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#n-most-similar-structures">N most similar structures</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tanimoto-similarity-search">Tanimoto similarity search</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#search-for-one-or-more-substructure">Search for  one or more substructure</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#search-for-at-least-one-of-the-substructures-in-each-sdf-file">Search for at least one of the substructures in each sdf file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#search-for-similarity-and-substructure">Search for similarity and substructure</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#change-fingerprint-type">Change fingerprint type</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">From Command Line</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#n-most-similar-structures">N most similar structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tanimoto-similarity-search">Tanimoto similarity search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#search-for-one-or-more-substructure">Search for  one or more substructure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#search-for-at-least-one-of-the-substructures-in-each-sdf-file">Search for at least one of the substructures in each sdf file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#search-for-similarity-and-substructure">Search for similarity and substructure</a></li>
 </ul>
 </li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog/index.html">ChangeLog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog/index.html">ChangeLog</a></li>
 </ul>
 
             
@@ -116,7 +114,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">analogs finder</a>
+          <a href="../index.html">analogs finder</a>
         
       </nav>
 
@@ -145,9 +143,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
-        
-          <li><a href="../index.html">Getting Started</a> &raquo;</li>
+      <li><a href="../index.html">Docs</a> &raquo;</li>
         
       <li>From Command Line</li>
     
@@ -155,7 +151,7 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/tutorial/command_line_tutorial/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/command_line_tutorial/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -230,16 +226,6 @@
 </div>
 </div></blockquote>
 </div>
-<div class="section" id="change-fingerprint-type">
-<h2>Change fingerprint type<a class="headerlink" href="#change-fingerprint-type" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">analogs_finder</span><span class="o">.</span><span class="n">main</span> <span class="o">&lt;</span><span class="n">database</span> <span class="p">(</span><span class="n">sdf</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">query_molecule</span> <span class="p">(</span><span class="n">sdf</span> <span class="k">with</span> <span class="n">several</span> <span class="n">entries</span> <span class="p">(</span><span class="n">substructures</span><span class="p">)</span><span class="o">&gt;</span>  <span class="o">--</span><span class="n">output</span> <span class="o">&lt;</span><span class="n">outputname</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">hybrid</span> <span class="o">&lt;</span><span class="n">substructure</span> <span class="n">sdf</span> <span class="n">file</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">fp_type</span> <span class="p">[</span> <span class="n">DL</span><span class="p">,</span> <span class="n">circular</span><span class="p">,</span> <span class="n">MACCS</span><span class="p">,</span> <span class="n">torsions</span><span class="p">]</span>
-
-<span class="n">python</span> <span class="n">analogs_finder</span><span class="o">.</span><span class="n">main</span> <span class="n">analogs_finder</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">actives_final</span><span class="o">.</span><span class="n">sdf</span> <span class="n">analogs_finder</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">query_mol</span><span class="o">.</span><span class="n">sdf</span> <span class="o">--</span><span class="n">output</span> <span class="n">most_similars</span><span class="o">.</span><span class="n">sdf</span> <span class="o">--</span><span class="n">hybrid</span> <span class="n">analogs_finder</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">substructure_1</span><span class="o">.</span><span class="n">sdf</span> <span class="o">--</span><span class="n">fp_type</span> <span class="n">circular</span>
-</pre></div>
-</div>
-</div></blockquote>
-</div>
 </div>
 
 
@@ -250,10 +236,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../changelog/index.html" class="btn btn-neutral float-right" title="ChangeLog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../changelog/index.html" class="btn btn-neutral float-right" title="ChangeLog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../api_tutorial/index.html" class="btn btn-neutral" title="From python API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../tutorial/index.html" class="btn btn-neutral" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -283,16 +269,16 @@
 
     
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
     
 
   
 
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

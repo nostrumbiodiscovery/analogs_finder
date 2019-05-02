@@ -118,4 +118,17 @@ than certain treshold that also contain certain substructure
 
 
 
+Use different fingerprints
+------------------------------
+
+::
+
+  molecule_query = next(Chem.SDMolSupplier("examples/query_molecule.sdf"))
+  substructure_file = "examples/substructure.sdf"
+
+  similars_daylight = most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold, fp_type="DL")
+  similars_circular = most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold, fp_type="circular")
+  similars_torsions = most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold, fp_type="torsions")
+  similars_MACCS = most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold, fp_type="MACCS")
+
 

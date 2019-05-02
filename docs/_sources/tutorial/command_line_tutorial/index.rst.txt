@@ -69,5 +69,14 @@ Search for similarity and substructure
 
 
 
+Change fingerprint type
+----------------------------------------
+
+
+    ::
+
+       python -m analogs_finder.main <database (sdf)> <query_molecule (sdf with several entries (substructures)>  --output <outputname> --hybrid <substructure sdf file> --fp_type [ DL, circular, MACCS, torsions]
+
+       python analogs_finder.main analogs_finder/examples/actives_final.sdf analogs_finder/examples/query_mol.sdf --output most_similars.sdf --hybrid analogs_finder/examples/substructure_1.sdf --fp_type circular
 
 
