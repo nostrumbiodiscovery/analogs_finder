@@ -23,7 +23,7 @@ Installation
 To use as Python module
 ########################
 
-https://danielsoler93.github.io/analogs_finder/tutorial/index.html
+htps://danielsoler93.github.io/analogs_finder/api_tutorial/index.html
 
 
 To use from Command Line
