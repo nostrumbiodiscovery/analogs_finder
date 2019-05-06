@@ -36,4 +36,6 @@ def test_hybrid(molecule=MOLECULE, db=DB, substructures=SUBSTRUCTURE, treshold=0
     output = an.query_database(db, molecule, hybrid=substructures, treshold=treshold)
     assert result == output
 
-
+def test_tresh_all_fps(molecule=MOLECULE, db=DB, result=RESULT_TRESH):
+    output = an.query_database(db, molecule, treshold=[0.7, 0.4, 0.4, 0.27], fp_type=["DL", "circular", "torsions", "MACCS"])
+    assert result == output

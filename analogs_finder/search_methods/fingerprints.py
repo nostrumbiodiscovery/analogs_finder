@@ -12,5 +12,5 @@ def fingerprint(mol, fp_type="DL"):
     elif fp_type == "MACCS":
         return MACCSkeys.GenMACCSKeys(mol)
     elif fp_type == "torsions":
-        return Pairs.GetAtomPairFingerprint(mol)
+        return Pairs.GetAtomPairFingerprintAsBitVect(mol)
 
