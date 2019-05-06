@@ -83,8 +83,9 @@ Change fingerprint type
 Use all fingerprints in one job with different tresholds
 --------------------------------------------------------------
 
-   ::
+::
 
    python -m analogs_finder.main <databaseSDF> <querymolecSDF> --tresh <tresholds> --fp_type <fingerpinttypes>
 
    python -m analogs_finder.main ~/repos/analogs_finder/tests/data/database.sdf ~/repos/analogs_finder/tests/data/substructre_1.sdf --tresh 0.7 0.4 0.7 0.27 --fp_type DL circular torsions MACCS 
+
