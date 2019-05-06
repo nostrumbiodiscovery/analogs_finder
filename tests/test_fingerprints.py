@@ -14,5 +14,5 @@ DB = os.path.join(DIR, "data/database.sdf")
 
 
 def test_fp_type(molecule=MOLECULE, db=DB, fp_type="circular", result=RESULT_FP_DL):
-    output = an.query_database(db, molecule, treshold=0.45, fp_type=fp_type, allow_repetition=True)
+    output = an.query_database(db, molecule, treshold=0.45, fp_type=fp_type)
     assert result != output

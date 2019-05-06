@@ -13,7 +13,7 @@ from analogs_finder.helpers import helpers as hp
 
 
 
-def query_database(database, molecules, n_structs=500, combi_subsearch=False, most_similars=False, substructure=False, output="similars.sdf", hybrid=None, treshold=0.7, allow_repetition=True, fp_type="DL"):
+def query_database(database, molecules, n_structs=500, combi_subsearch=False, most_similars=False, substructure=False, output="similars.sdf", hybrid=None, treshold=0.7, avoid_repetition=False, fp_type="DL"):
 
     assert type(database) == str, "database must be a unique sdf file"
     assert type(molecules) == list, "query molecule must be a list of a single or multiple sdf files"
@@ -57,7 +57,7 @@ def query_database(database, molecules, n_structs=500, combi_subsearch=False, mo
         
 
     if mol_most_similars:
-        if not allow_repetition:
+        if avoid_repetition:
             mol_most_similars = hp.remove_duplicates(mol_most_similars)
         w = Chem.SDWriter(output)
         n_mol_found = 0
@@ -80,7 +80,7 @@ def add_args(parser):
     parser.add_argument('--sb', action="store_true", help="Get the n most similar structs")
     parser.add_argument('--substructure', action="store_true", help="Get all the structures with a certain substructure")
     parser.add_argument('--combi_subsearch', action="store_true", help="Get almost on of the substructures in each sdf file")
-    parser.add_argument('--allow_repetition', action="store_true", help="Allow to have the same molecule name several times in the final sdf file")
+    parser.add_argument('--avoid_repetition', action="store_true", help="Allow to have the same molecule name several times in the final sdf file")
     parser.add_argument('--hybrid', type=str, help="Hybird model between similarity and substructure search")
     parser.add_argument('--fp_type', nargs="+", help="Fingerprint type to use [DL, circular, torsions, MACCS]", default=["DL"])
 
@@ -89,4 +89,4 @@ if __name__ == "__main__":
     add_args(parser)
     args = parser.parse_args()
     query_database(args.database, args.molecules, n_structs=args.n, most_similars=args.sb, 
-          combi_subsearch=args.combi_subsearch, substructure=args.substructure, output=args.output, treshold=args.tresh, allow_repetition=args.allow_repetition, hybrid=args.hybrid, fp_type=args.fp_type)
+          combi_subsearch=args.combi_subsearch, substructure=args.substructure, output=args.output, treshold=args.tresh, avoid_repetition=args.avoid_repetition, hybrid=args.hybrid, fp_type=args.fp_type)
