@@ -110,7 +110,7 @@ than certain treshold that also contain certain substructure
   molecule_query = next(Chem.SDMolSupplier("examples/query_molecule.sdf"))
   substructure_file = "examples/substructure.sdf"
 
-  similars = most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold)
+  similars = mt.most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold)
   similars_no_duplicates = hp.remove_duplicates(similars)
   
   w = Chem.SDWriter(output)
@@ -126,9 +126,17 @@ Use different fingerprints
   molecule_query = next(Chem.SDMolSupplier("examples/query_molecule.sdf"))
   substructure_file = "examples/substructure.sdf"
 
-  similars_daylight = most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold, fp_type="DL")
-  similars_circular = most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold, fp_type="circular")
-  similars_torsions = most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold, fp_type="torsions")
-  similars_MACCS = most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold, fp_type="MACCS")
+  similars_daylight = mt.most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold, fp_type="DL")
+  similars_circular = mt.most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold, fp_type="circular")
+  similars_torsions = mt.most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold, fp_type="torsions")
+  similars_MACCS = mt.most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold, fp_type="MACCS")
 
 
+Use all four fingerprints to query one database with different tresholds
+-------------------------------------------------------------------------------
+
+::
+
+  tresholds = [0.7, 0.4, 0.4, 0.6]
+  fp_types = ["DL", "circular", "torsions", "MACCS"]
+  similarts = mt.search_similarity_tresh_several_fp(molecule_query, molecules_db, tresholds=treshold, fp_types=fp_type)

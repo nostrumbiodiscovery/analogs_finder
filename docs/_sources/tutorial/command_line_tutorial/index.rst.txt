@@ -80,3 +80,12 @@ Change fingerprint type
        python analogs_finder.main analogs_finder/examples/actives_final.sdf analogs_finder/examples/query_mol.sdf --output most_similars.sdf --hybrid analogs_finder/examples/substructure_1.sdf --fp_type circular
 
 
+Use all fingerprints in one job with different tresholds
+--------------------------------------------------------------
+
+::
+
+   python -m analogs_finder.main <databaseSDF> <querymolecSDF> --tresh <tresholds> --fp_type <fingerpinttypes>
+
+   python -m analogs_finder.main ~/repos/analogs_finder/tests/data/database.sdf ~/repos/analogs_finder/tests/data/substructre_1.sdf --tresh 0.7 0.4 0.7 0.27 --fp_type DL circular torsions MACCS 
+

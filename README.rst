@@ -23,11 +23,11 @@ Installation
 To use as Python module
 ########################
 
-htps://danielsoler93.github.io/analogs_finder/api_tutorial/index.html
+https://nostrumbiodiscovery.github.io/analogs_finder/tutorial/api_tutorial/index.html
 
 
 To use from Command Line
 #############################
 
-https://danielsoler93.github.io/analogs_finder/tutorial/command_line_tutorial/index.html
+https://nostrumbiodiscovery.github.io/analogs_finder/tutorial/command_line_tutorial/index.html
 
