@@ -24,7 +24,7 @@ def search_most_similars(molecule_query, molecules_db, n_structs, fp_type="DL"):
 
 def search_similarity_tresh(molecule_query, molecules_db, treshold, fp_type="DL"):
     for s, m in tqdm(compute_similarity(molecule_query, molecules_db, fp_type)):
-        if s > treshold:
+        if s > float(treshold):
             m.SetProp("Similarity", str(s))
             yield m
 
@@ -95,7 +95,7 @@ def compute_similarity_severl_fp(mref, molecules, fp_types=["DL", "circular", "t
 def most_similar_with_substructure(molecule_query, molecules_db, substructures, treshold, fp_type="DL"):
     for s, m in tqdm(compute_similarity(molecule_query, molecules_db, fp_type)):
         # Similarity based
-        if s > treshold:
+        if s > float(treshold):
             for substruct in Chem.SDMolSupplier(substructures):
                 # Substructure based
                 if m.HasSubstructMatch(substruct, useChirality=True):
