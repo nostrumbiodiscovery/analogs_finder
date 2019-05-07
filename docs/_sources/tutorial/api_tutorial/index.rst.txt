@@ -1,6 +1,11 @@
 From python API
 =================
 
+Download examples
+-------------------
+
+From command line: git clone https://github.com/NostrumBioDiscovery/analogs_finder.git
+
 
 Load your query molecule and your database
 --------------------------------------------
@@ -9,8 +14,8 @@ Load your query molecule and your database
 
   from rdkit import Chem
 
-  database = "examples/database.sdf"
-  qmolecule = "examples/substructure_1.sdf"
+  database = "analogs_finder/examples/database.sdf"
+  qmolecule = "analogs_finder/examples/substructre_1.sdf"
 
   molecules_db= Chem.SDMolSupplier(database)
   molecule_query = next(Chem.SDMolSupplier(qmolecule))
@@ -64,7 +69,7 @@ with at least one of the substructures on you query sdf file
 
 ::
 
-  substructures = "example/substructure2.sdf"
+  substructures = "analogs_finder/examples/substructre_2.sdf"
 
   molecule_query = Chem.SDMolSupplier(substructures)
   similars  = mt.search_substructure(molecule_query, molecules_db)
@@ -88,8 +93,10 @@ Finally, I will obtain structures with an amide and either a 5 or 6 memebr ring
 
 
 ::
- 
-  substructures_sdf = glob.glob("examples/subs*.sdf")
+
+  import glob
+
+  substructures_sdf = glob.glob("analogs_finder/examples/subs*.sdf")
 
   similars = mt.combi_substructure_search(substructures_sdf, molecules_db)
   similars_no_duplicates = hp.remove_duplicates(similars)
@@ -107,10 +114,9 @@ than certain treshold that also contain certain substructure
 
 ::
 
-  molecule_query = next(Chem.SDMolSupplier("examples/query_molecule.sdf"))
-  substructure_file = "examples/substructure.sdf"
+  substructure_file = "analogs_finder/examples/substructre_3.sdf"
 
-  similars = mt.most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold)
+  similars = mt.most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold=0.1)
   similars_no_duplicates = hp.remove_duplicates(similars)
   
   w = Chem.SDWriter(output)
@@ -126,10 +132,10 @@ Use different fingerprints
   molecule_query = next(Chem.SDMolSupplier("examples/query_molecule.sdf"))
   substructure_file = "examples/substructure.sdf"
 
-  similars_daylight = mt.most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold, fp_type="DL")
-  similars_circular = mt.most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold, fp_type="circular")
-  similars_torsions = mt.most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold, fp_type="torsions")
-  similars_MACCS = mt.most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold, fp_type="MACCS")
+  similars_daylight = mt.search_most_similars(molecule_query, molecules_db, fp_type="DL")
+  similars_circular = mt.search_most_similars(molecule_query, molecules_db, fp_type="circular")
+  similars_torsions = mt.search_most_similars(molecule_query, molecules_db, fp_type="torsions")
+  similars_MACCS = mt.search_most_similars(molecule_query, molecules_db, fp_type="MACCS")
 
 
 Use all four fingerprints to query one database with different tresholds
@@ -139,4 +145,4 @@ Use all four fingerprints to query one database with different tresholds
 
   tresholds = [0.7, 0.4, 0.4, 0.6]
   fp_types = ["DL", "circular", "torsions", "MACCS"]
-  similarts = mt.search_similarity_tresh_several_fp(molecule_query, molecules_db, tresholds=treshold, fp_types=fp_type)
+  similarts = mt.search_similarity_tresh_several_fp(molecule_query, molecules_db, tresholds=tresholds, fp_types=fp_types)

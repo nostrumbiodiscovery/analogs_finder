@@ -1,8 +1,8 @@
 Analogs Finder
 ##############
 
-.. image:: https://travis-ci.com/danielSoler93/analogs_finder.svg?branch=master
-       :target: https://travis-ci.com/danielSoler93/analogs_finder
+.. image:: https://travis-ci.com/NostrumBioDiscovery/analogs_finder.svg?branch=master
+       :target: https://travis-ci.com/NostrumBioDiscovery/analogs_finder
 
 .. image:: https://anaconda.org/nostrumbiodiscovery/analogs_finder/badges/version.svg
        :target: https://anaconda.org/nostrumbiodiscovery/analogs_finder

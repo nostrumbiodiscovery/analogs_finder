@@ -88,6 +88,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Getting Started</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">From python API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#download-examples">Download examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#load-your-query-molecule-and-your-database">Load your query molecule and your database</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#most-similars-n-molecules">Most Similars n Molecules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tanimoto-similarity-search">Tanimoto Similarity Search</a></li>
@@ -172,12 +173,16 @@
             
   <div class="section" id="from-python-api">
 <h1>From python API<a class="headerlink" href="#from-python-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="download-examples">
+<h2>Download examples<a class="headerlink" href="#download-examples" title="Permalink to this headline">¶</a></h2>
+<p>From command line: git clone <a class="reference external" href="https://github.com/NostrumBioDiscovery/analogs_finder.git">https://github.com/NostrumBioDiscovery/analogs_finder.git</a></p>
+</div>
 <div class="section" id="load-your-query-molecule-and-your-database">
 <h2>Load your query molecule and your database<a class="headerlink" href="#load-your-query-molecule-and-your-database" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="k">import</span> <span class="n">Chem</span>
 
-<span class="n">database</span> <span class="o">=</span> <span class="s2">&quot;examples/database.sdf&quot;</span>
-<span class="n">qmolecule</span> <span class="o">=</span> <span class="s2">&quot;examples/substructure_1.sdf&quot;</span>
+<span class="n">database</span> <span class="o">=</span> <span class="s2">&quot;analogs_finder/examples/database.sdf&quot;</span>
+<span class="n">qmolecule</span> <span class="o">=</span> <span class="s2">&quot;analogs_finder/examples/substructre_1.sdf&quot;</span>
 
 <span class="n">molecules_db</span><span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">SDMolSupplier</span><span class="p">(</span><span class="n">database</span><span class="p">)</span>
 <span class="n">molecule_query</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">SDMolSupplier</span><span class="p">(</span><span class="n">qmolecule</span><span class="p">))</span>
@@ -222,7 +227,7 @@ than a desired treshold</p>
 <h2>Substructure Search<a class="headerlink" href="#substructure-search" title="Permalink to this headline">¶</a></h2>
 <p>The search_substructure will output molecules
 with at least one of the substructures on you query sdf file</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">substructures</span> <span class="o">=</span> <span class="s2">&quot;example/substructure2.sdf&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">substructures</span> <span class="o">=</span> <span class="s2">&quot;analogs_finder/examples/substructre_2.sdf&quot;</span>
 
 <span class="n">molecule_query</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">SDMolSupplier</span><span class="p">(</span><span class="n">substructures</span><span class="p">)</span>
 <span class="n">similars</span>  <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">search_substructure</span><span class="p">(</span><span class="n">molecule_query</span><span class="p">,</span> <span class="n">molecules_db</span><span class="p">)</span>
@@ -243,7 +248,9 @@ so I will pass this two substructures in a sdf so at least one of them
 have to be in the outputted molecules. But, at the same time I also want to
 have an amide so I will pass another sdf file with  the amide substructure.
 Finally, I will obtain structures with an amide and either a 5 or 6 memebr ring</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">substructures_sdf</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;examples/subs*.sdf&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
+
+<span class="n">substructures_sdf</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;analogs_finder/examples/subs*.sdf&quot;</span><span class="p">)</span>
 
 <span class="n">similars</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">combi_substructure_search</span><span class="p">(</span><span class="n">substructures_sdf</span><span class="p">,</span> <span class="n">molecules_db</span><span class="p">)</span>
 <span class="n">similars_no_duplicates</span> <span class="o">=</span> <span class="n">hp</span><span class="o">.</span><span class="n">remove_duplicates</span><span class="p">(</span><span class="n">similars</span><span class="p">)</span>
@@ -258,10 +265,9 @@ Finally, I will obtain structures with an amide and either a 5 or 6 memebr ring<
 <p>The most_similar_with_substructure method will output
 molecules with a tanimoto similarity coefficient higher
 than certain treshold that also contain certain substructure</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">molecule_query</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">SDMolSupplier</span><span class="p">(</span><span class="s2">&quot;examples/query_molecule.sdf&quot;</span><span class="p">))</span>
-<span class="n">substructure_file</span> <span class="o">=</span> <span class="s2">&quot;examples/substructure.sdf&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">substructure_file</span> <span class="o">=</span> <span class="s2">&quot;analogs_finder/examples/substructre_3.sdf&quot;</span>
 
-<span class="n">similars</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">most_similar_with_substructure</span><span class="p">(</span><span class="n">molecule_query</span><span class="p">,</span> <span class="n">molecules_db</span><span class="p">,</span> <span class="n">substructure_file</span><span class="p">,</span> <span class="n">treshold</span><span class="p">)</span>
+<span class="n">similars</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">most_similar_with_substructure</span><span class="p">(</span><span class="n">molecule_query</span><span class="p">,</span> <span class="n">molecules_db</span><span class="p">,</span> <span class="n">substructure_file</span><span class="p">,</span> <span class="n">treshold</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="n">similars_no_duplicates</span> <span class="o">=</span> <span class="n">hp</span><span class="o">.</span><span class="n">remove_duplicates</span><span class="p">(</span><span class="n">similars</span><span class="p">)</span>
 
 <span class="n">w</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">SDWriter</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
@@ -274,10 +280,10 @@ than certain treshold that also contain certain substructure</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">molecule_query</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">SDMolSupplier</span><span class="p">(</span><span class="s2">&quot;examples/query_molecule.sdf&quot;</span><span class="p">))</span>
 <span class="n">substructure_file</span> <span class="o">=</span> <span class="s2">&quot;examples/substructure.sdf&quot;</span>
 
-<span class="n">similars_daylight</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">most_similar_with_substructure</span><span class="p">(</span><span class="n">molecule_query</span><span class="p">,</span> <span class="n">molecules_db</span><span class="p">,</span> <span class="n">substructure_file</span><span class="p">,</span> <span class="n">treshold</span><span class="p">,</span> <span class="n">fp_type</span><span class="o">=</span><span class="s2">&quot;DL&quot;</span><span class="p">)</span>
-<span class="n">similars_circular</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">most_similar_with_substructure</span><span class="p">(</span><span class="n">molecule_query</span><span class="p">,</span> <span class="n">molecules_db</span><span class="p">,</span> <span class="n">substructure_file</span><span class="p">,</span> <span class="n">treshold</span><span class="p">,</span> <span class="n">fp_type</span><span class="o">=</span><span class="s2">&quot;circular&quot;</span><span class="p">)</span>
-<span class="n">similars_torsions</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">most_similar_with_substructure</span><span class="p">(</span><span class="n">molecule_query</span><span class="p">,</span> <span class="n">molecules_db</span><span class="p">,</span> <span class="n">substructure_file</span><span class="p">,</span> <span class="n">treshold</span><span class="p">,</span> <span class="n">fp_type</span><span class="o">=</span><span class="s2">&quot;torsions&quot;</span><span class="p">)</span>
-<span class="n">similars_MACCS</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">most_similar_with_substructure</span><span class="p">(</span><span class="n">molecule_query</span><span class="p">,</span> <span class="n">molecules_db</span><span class="p">,</span> <span class="n">substructure_file</span><span class="p">,</span> <span class="n">treshold</span><span class="p">,</span> <span class="n">fp_type</span><span class="o">=</span><span class="s2">&quot;MACCS&quot;</span><span class="p">)</span>
+<span class="n">similars_daylight</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">search_most_similars</span><span class="p">(</span><span class="n">molecule_query</span><span class="p">,</span> <span class="n">molecules_db</span><span class="p">,</span> <span class="n">fp_type</span><span class="o">=</span><span class="s2">&quot;DL&quot;</span><span class="p">)</span>
+<span class="n">similars_circular</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">search_most_similars</span><span class="p">(</span><span class="n">molecule_query</span><span class="p">,</span> <span class="n">molecules_db</span><span class="p">,</span> <span class="n">fp_type</span><span class="o">=</span><span class="s2">&quot;circular&quot;</span><span class="p">)</span>
+<span class="n">similars_torsions</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">search_most_similars</span><span class="p">(</span><span class="n">molecule_query</span><span class="p">,</span> <span class="n">molecules_db</span><span class="p">,</span> <span class="n">fp_type</span><span class="o">=</span><span class="s2">&quot;torsions&quot;</span><span class="p">)</span>
+<span class="n">similars_MACCS</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">search_most_similars</span><span class="p">(</span><span class="n">molecule_query</span><span class="p">,</span> <span class="n">molecules_db</span><span class="p">,</span> <span class="n">fp_type</span><span class="o">=</span><span class="s2">&quot;MACCS&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -285,7 +291,7 @@ than certain treshold that also contain certain substructure</p>
 <h2>Use all four fingerprints to query one database with different tresholds<a class="headerlink" href="#use-all-four-fingerprints-to-query-one-database-with-different-tresholds" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tresholds</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">]</span>
 <span class="n">fp_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DL&quot;</span><span class="p">,</span> <span class="s2">&quot;circular&quot;</span><span class="p">,</span> <span class="s2">&quot;torsions&quot;</span><span class="p">,</span> <span class="s2">&quot;MACCS&quot;</span><span class="p">]</span>
-<span class="n">similarts</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">search_similarity_tresh_several_fp</span><span class="p">(</span><span class="n">molecule_query</span><span class="p">,</span> <span class="n">molecules_db</span><span class="p">,</span> <span class="n">tresholds</span><span class="o">=</span><span class="n">treshold</span><span class="p">,</span> <span class="n">fp_types</span><span class="o">=</span><span class="n">fp_type</span><span class="p">)</span>
+<span class="n">similarts</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">search_similarity_tresh_several_fp</span><span class="p">(</span><span class="n">molecule_query</span><span class="p">,</span> <span class="n">molecules_db</span><span class="p">,</span> <span class="n">tresholds</span><span class="o">=</span><span class="n">tresholds</span><span class="p">,</span> <span class="n">fp_types</span><span class="o">=</span><span class="n">fp_types</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
