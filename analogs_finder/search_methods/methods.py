@@ -19,6 +19,7 @@ def search_most_similars(molecule_query, molecules_db, n_structs, fp_type="DL"):
             similarity[idx] = s
             m.SetProp("Similarity", str(s))
             molecules_most_similar[idx] = m
+    molecules_most_similar = [ m for m in molecules_most_similar if m != 0 ]
     return molecules_most_similar
 
 def search_similarity_tresh(molecule_query, molecules_db, treshold, fp_type="DL"):

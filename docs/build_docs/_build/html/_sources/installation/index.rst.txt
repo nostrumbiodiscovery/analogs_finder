@@ -8,6 +8,15 @@ From Conda (recommended)
 
  conda install -c NostrumBioDiscovery analogs_finder
 
+
+From PyPi
+-----------
+
+::
+
+ pip install analogs_finder
+
+ 
 From Source Code
 ---------------------
 
@@ -20,7 +29,3 @@ From Source Code
  python setup.py install
 
 
-From PyPi
------------
-
-Non implemented yet
