@@ -7,6 +7,12 @@ Analogs Finder
 .. image:: https://anaconda.org/nostrumbiodiscovery/analogs_finder/badges/version.svg
        :target: https://anaconda.org/nostrumbiodiscovery/analogs_finder
 
+.. image:: https://img.shields.io/github/last-commit/NostrumBioDiscovery/analogs_finder.svg
+       :target: https://anaconda.org/nostrumbiodiscovery/analogs_finder
+
+.. image:: https://img.shields.io/github/commit-activity/m/NostrumBioDiscovery/analogs_finder.svg
+       :target: https://anaconda.org/nostrumbiodiscovery/analogs_finder
+
 
 Description
 ##############
