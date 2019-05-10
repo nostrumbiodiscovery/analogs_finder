@@ -92,6 +92,15 @@ def compute_similarity_severl_fp(mref, molecules, fp_types=["DL", "circular", "t
             else:
                 break
 
+def compute_similarity_several_mols(mrefs, molecules, fp_type="DL"):
+    fp_refs = [ fps.fingerprint(mref, fp_type=fp_type) for mref in mrefs if mref ]
+    for m in molecules:
+        if m:
+            fp = fps.fingerprint(m, fp_type=fp_type)
+            yield [DataStructs.FingerprintSimilarity(fp_ref, fp) for fp_ref in fp_refs ], m
+        else:
+            pass
+
 def most_similar_with_substructure(molecule_query, molecules_db, substructures, treshold, fp_type="DL"):
     for s, m in tqdm(compute_similarity(molecule_query, molecules_db, fp_type)):
         # Similarity based

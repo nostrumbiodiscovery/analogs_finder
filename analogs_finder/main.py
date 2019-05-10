@@ -9,11 +9,12 @@ from rdkit import DataStructs
 from rdkit.Chem.Fingerprints import FingerprintMols
 from multiprocessing import Pool
 from analogs_finder.search_methods import methods as mt
+from analogs_finder.search_methods import fusion as fs
 from analogs_finder.helpers import helpers as hp
 
 
 
-def query_database(database, molecules, n_structs=500, combi_subsearch=False, most_similars=False, substructure=False, output="similars.sdf", hybrid=None, treshold=0.7, avoid_repetition=False, fp_type="DL"):
+def query_database(database, molecules, n_structs=500, combi_subsearch=False, most_similars=False, substructure=False, output="similars.sdf", hybrid=None, treshold=0.7, avoid_repetition=False, fp_type="DL", turbo=False, neighbours=5):
 
     assert type(database) == str, "database must be a unique sdf file"
     assert type(molecules) == list, "query molecule must be a list of a single or multiple sdf files"
@@ -28,6 +29,8 @@ def query_database(database, molecules, n_structs=500, combi_subsearch=False, mo
 
     # Query Molecule
     if most_similars:
+        molecule_query = next(Chem.SDMolSupplier(molecules[0]))
+    elif turbo:
         molecule_query = next(Chem.SDMolSupplier(molecules[0]))
     elif combi_subsearch:
         molecule_query = molecules
@@ -44,6 +47,8 @@ def query_database(database, molecules, n_structs=500, combi_subsearch=False, mo
     mol_most_similars = None
     if most_similars:
         mol_most_similars  = mt.search_most_similars(molecule_query, molecules_db, n_structs, fp_type=fp_type)
+    elif turbo:
+        mol_most_similars = fs.turbo_similarity(molecule_query, molecules_db, neighbours=neighbours, treshold=treshold, fp_type=fp_type)
     elif substructure:
         mol_most_similars  = mt.search_substructure(molecule_query, molecules_db)
     elif combi_subsearch:
@@ -83,10 +88,12 @@ def add_args(parser):
     parser.add_argument('--avoid_repetition', action="store_true", help="Allow to have the same molecule name several times in the final sdf file")
     parser.add_argument('--hybrid', type=str, help="Hybird model between similarity and substructure search")
     parser.add_argument('--fp_type', nargs="+", help="Fingerprint type to use [DL, circular, torsions, MACCS]", default=["DL"])
+    parser.add_argument('--turbo', action="store_true", help="Run similarity for your reference structure and N most similar neighbours")
+    parser.add_argument('--neighbours', type=int, help="Number of neighbours in turbo search. Ignored if not flag --turbo")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Find analogs to a query molecule on your private database')
     add_args(parser)
     args = parser.parse_args()
     query_database(args.database, args.molecules, n_structs=args.n, most_similars=args.sb, 
-          combi_subsearch=args.combi_subsearch, substructure=args.substructure, output=args.output, treshold=args.tresh, avoid_repetition=args.avoid_repetition, hybrid=args.hybrid, fp_type=args.fp_type)
+          combi_subsearch=args.combi_subsearch, substructure=args.substructure, output=args.output, treshold=args.tresh, avoid_repetition=args.avoid_repetition, hybrid=args.hybrid, fp_type=args.fp_type, turbo=args.turbo, neighbours=args.neighbours)
