@@ -32,7 +32,7 @@ before_install:
 
 install:
  # Necessary dependencies
- - conda install -q tqdm numpy pytest pytest-cov
+ - conda install -q tqdm numpy pytest pytest-cov codecov
 
  # Install the most recent rdkit package from the RDKit anaconda channel.
  - conda install -q -c rdkit rdkit
@@ -48,7 +48,7 @@ script:
  - python -m pytest --cov=./ tests/test_methods.py tests/test_helpers.py tests/test_fusions.py tests/test_fingerprints.py
 
 after_script:
- - codecov
+- bash < (curl -s https://codecov.io/bash)
 
 before_deploy:
  - conda install -f  setuptools
