@@ -13,11 +13,14 @@ Analogs Finder
 .. image:: https://img.shields.io/github/commit-activity/m/NostrumBioDiscovery/analogs_finder.svg
        :target: https://anaconda.org/nostrumbiodiscovery/analogs_finder
 
-
 Description
 ##############
 
 Analogs finder is a python based query-search engine for drug discovery. It allows the user to perform queries based on molecule similarity or substructure matching to retrieve similar analogs from your initial molecule.
+
+.. figure:: docs/_images/query_result.png
+    :scale: 80%
+    :align: center
 
 Installation
 ##############
