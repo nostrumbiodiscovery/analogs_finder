@@ -30,7 +30,7 @@ def search_similarity_tresh(molecule_query, molecules_db, treshold, fp_type="DL"
 
 def search_similarity_tresh_several_fp(molecule_query, molecules_db, tresholds=[0.7, 0.4, 0.7, 0.4], fp_types=["DL", "circular", "torsions", "MACCS"]):
     assert len(tresholds) == len(fp_types), "Number of fingerprints must be equal to number of tresholds"
-    print("Searching most similars...")
+    print("Searching most similars several fingerprint types...")
     for s, m, j in compute_similarity_severl_fp(molecule_query, molecules_db, fp_types, tresholds):
         fp_name = fp_types[j]
         m.SetProp("Similarity_{}".format(fp_name), str(s))
@@ -81,9 +81,9 @@ def compute_similarity_severl_fp(mref, molecules, fp_types=["DL", "circular", "t
         for j, fp_type in enumerate(fp_types):
             fp_ref = fps.fingerprint(mref, fp_type=fp_type)
             if not chosen:
-                fp = fps.fingerprint(m, fp_type=fp_type)
-                s = DataStructs.FingerprintSimilarity(fp_ref, fp)
                 if m:
+                    fp = fps.fingerprint(m, fp_type=fp_type)
+                    s = DataStructs.FingerprintSimilarity(fp_ref, fp)
                     if s > float(tresholds[j]):
                         chosen = True
                         yield s, m, j
