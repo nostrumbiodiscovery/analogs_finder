@@ -48,7 +48,7 @@ script:
  - python -m pytest --cov=./ tests/test_methods.py tests/test_helpers.py tests/test_fusions.py tests/test_fingerprints.py
 
 after_script:
-- bash < (curl -s https://codecov.io/bash)
+- curl -s https://codecov.io/bash
 
 before_deploy:
  - conda install -f  setuptools
