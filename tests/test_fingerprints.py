@@ -21,3 +21,8 @@ def test_fp_type(molecule=MOLECULE, db=DB, fp_type="circular", result=RESULT_FP_
 def test_circular(molecule=MOLECULE_CIRCULAR, db=DB_CIRCULAR, fp_type="circular", result=18):
     output = an.query_database(db, molecule, treshold=0.4, fp_type=fp_type)
     assert result == output
+
+def test_pharm(molecule=MOLECULE_CIRCULAR, db=DB_CIRCULAR, fp_type="pharm", result=12):
+    output = an.query_database(db, molecule, treshold=0.4, fp_type=fp_type)
+    assert result == output
+

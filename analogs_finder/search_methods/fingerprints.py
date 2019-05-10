@@ -2,6 +2,7 @@ from rdkit.Chem.Fingerprints import FingerprintMols
 from rdkit.Chem import MACCSkeys
 from rdkit.Chem.AtomPairs import Pairs
 from rdkit.Chem import AllChem
+from rdkit.Chem.Pharm2D import Gobbi_Pharm2D,Generate
 
 
 def fingerprint(mol, fp_type="DL"):
@@ -13,4 +14,6 @@ def fingerprint(mol, fp_type="DL"):
         return MACCSkeys.GenMACCSKeys(mol)
     elif fp_type == "torsions":
         return Pairs.GetAtomPairFingerprintAsBitVect(mol)
+    elif fp_type == "pharm":
+        return Generate.Gen2DFingerprint(mol,Gobbi_Pharm2D.factory) 
 
