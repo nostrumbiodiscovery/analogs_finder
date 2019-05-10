@@ -97,6 +97,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#similarity-and-substructure-hybrid-search">Similarity and Substructure hybrid search</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#use-different-fingerprints">Use different fingerprints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#use-all-four-fingerprints-to-query-one-database-with-different-tresholds">Use all four fingerprints to query one database with different tresholds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#turbo-search-method">Turbo search method:</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../command_line_tutorial/index.html">From Command Line</a></li>
@@ -292,6 +293,16 @@ than certain treshold that also contain certain substructure</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tresholds</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">]</span>
 <span class="n">fp_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DL&quot;</span><span class="p">,</span> <span class="s2">&quot;circular&quot;</span><span class="p">,</span> <span class="s2">&quot;torsions&quot;</span><span class="p">,</span> <span class="s2">&quot;MACCS&quot;</span><span class="p">]</span>
 <span class="n">similarts</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">search_similarity_tresh_several_fp</span><span class="p">(</span><span class="n">molecule_query</span><span class="p">,</span> <span class="n">molecules_db</span><span class="p">,</span> <span class="n">tresholds</span><span class="o">=</span><span class="n">tresholds</span><span class="p">,</span> <span class="n">fp_types</span><span class="o">=</span><span class="n">fp_types</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="turbo-search-method">
+<h2>Turbo search method:<a class="headerlink" href="#turbo-search-method" title="Permalink to this headline">¶</a></h2>
+<p>Instead of just querying the reference molecule and setting a tanimoto treshold,
+we first look for the N most similar neighbours and we run similarity search with
+the reference molecule and theses neghbours, finally performing data fusion.</p>
+<p>For more details: <a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10037">https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10037</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">turbo_similars</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">turbo_similarity</span><span class="p">(</span><span class="n">molecule_query</span><span class="p">,</span> <span class="n">molecules_db</span><span class="p">,</span> <span class="n">neighbours</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">treshold</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">fp_type</span><span class="o">=</span><span class="s2">&quot;circular&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

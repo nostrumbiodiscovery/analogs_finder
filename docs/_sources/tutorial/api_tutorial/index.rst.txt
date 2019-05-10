@@ -146,3 +146,16 @@ Use all four fingerprints to query one database with different tresholds
   tresholds = [0.7, 0.4, 0.4, 0.6]
   fp_types = ["DL", "circular", "torsions", "MACCS"]
   similarts = mt.search_similarity_tresh_several_fp(molecule_query, molecules_db, tresholds=tresholds, fp_types=fp_types)
+
+Turbo search method:
+----------------------
+
+Instead of just querying the reference molecule and setting a tanimoto treshold,
+we first look for the N most similar neighbours and we run similarity search with
+the reference molecule and theses neghbours, finally performing data fusion.
+
+For more details: https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10037
+
+::
+
+ turbo_similars = fs.turbo_similarity(molecule_query, molecules_db, neighbours=5, treshold=0.4, fp_type="circular") 

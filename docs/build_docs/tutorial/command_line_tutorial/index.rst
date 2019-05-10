@@ -89,3 +89,19 @@ Use all fingerprints in one job with different tresholds
 
    python -m analogs_finder.main ~/repos/analogs_finder/tests/data/database.sdf ~/repos/analogs_finder/tests/data/substructre_1.sdf --tresh 0.7 0.4 0.7 0.27 --fp_type DL circular torsions MACCS 
 
+
+Turbo search method:
+----------------------
+
+Instead of just querying the reference molecule and setting a tanimoto treshold,
+we first look for the N most similar neighbours and we run similarity search with
+the reference molecule and theses neghbours, finally performing data fusion.
+
+For more details: https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10037
+
+::
+   python -m analogs_finder.main <databaseSDF> <querymolecSDF> --turbo --neighbours <N>--tresh <tresholds> --fp_type <fingerpinttypes>
+
+   python -m analogs_finder.main ~/repos/analogs_finder/tests/data/database.sdf ~/repos/analogs_finder/tests/data/substructre_1.sdf --turbo --neighbours 5 --tresh 0.7 --fp_type circular
+
+
