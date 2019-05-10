@@ -136,6 +136,7 @@ Use different fingerprints
   similars_circular = mt.search_most_similars(molecule_query, molecules_db, fp_type="circular")
   similars_torsions = mt.search_most_similars(molecule_query, molecules_db, fp_type="torsions")
   similars_MACCS = mt.search_most_similars(molecule_query, molecules_db, fp_type="MACCS")
+  similars_pharm = mt.search_most_similars(molecule_query, molecules_db, fp_type="pharm")
 
 
 Use all four fingerprints to query one database with different tresholds
