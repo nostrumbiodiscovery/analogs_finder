@@ -100,8 +100,7 @@ the reference molecule and theses neghbours, finally performing data fusion.
 For more details: https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10037
 
 ::
+
    python -m analogs_finder.main <databaseSDF> <querymolecSDF> --turbo --neighbours <N>--tresh <tresholds> --fp_type <fingerpinttypes>
 
    python -m analogs_finder.main ~/repos/analogs_finder/tests/data/database.sdf ~/repos/analogs_finder/tests/data/substructre_1.sdf --turbo --neighbours 5 --tresh 0.7 --fp_type circular
-
-
