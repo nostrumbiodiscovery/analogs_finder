@@ -1,3 +1,5 @@
+import matplotlib
+#matplotlib.use('Agg')
 import argparse
 import sys
 from functools import partial
@@ -10,11 +12,12 @@ from rdkit.Chem.Fingerprints import FingerprintMols
 from multiprocessing import Pool
 from analogs_finder.search_methods import methods as mt
 from analogs_finder.search_methods import fusion as fs
+from analogs_finder.analysis import analysis_dataset as an
 from analogs_finder.helpers import helpers as hp
 
 
 
-def query_database(database, molecules, n_structs=500, combi_subsearch=False, most_similars=False, substructure=False, output="similars.sdf", hybrid=None, treshold=0.7, avoid_repetition=False, fp_type="DL", turbo=False, neighbours=5):
+def query_database(database, molecules, n_structs=500, combi_subsearch=False, most_similars=False, substructure=False, output="similars.sdf", hybrid=None, treshold=0.7, avoid_repetition=False, fp_type="DL", turbo=False, neighbours=5, analysis_dataset=False, test=False):
 
     assert type(database) == str, "database must be a unique sdf file"
     assert type(molecules) == list, "query molecule must be a list of a single or multiple sdf files"
@@ -26,6 +29,13 @@ def query_database(database, molecules, n_structs=500, combi_subsearch=False, mo
 
     # Database
     molecules_db= Chem.SDMolSupplier(database)
+
+    #Previous Analysis
+    if analysis_dataset:
+        print("Analysing dataset...")
+        molecule_query = next(Chem.SDMolSupplier(molecules[0]))
+        an.main(molecule_query, molecules_db, test=test)
+        return
 
     # Query Molecule
     if most_similars:
@@ -63,11 +73,12 @@ def query_database(database, molecules, n_structs=500, combi_subsearch=False, mo
 
     if mol_most_similars:
         if avoid_repetition:
+            #Broken
             mol_most_similars = hp.remove_duplicates(mol_most_similars)
         w = Chem.SDWriter(output)
         n_mol_found = 0
         for m in mol_most_similars: 
-            w.write(m)
+            w.write(m.molecule)
             n_mol_found += 1
         print("Number of found molecules {}".format(n_mol_found))
         #p = Pool(processes=20)
@@ -90,10 +101,12 @@ def add_args(parser):
     parser.add_argument('--fp_type', nargs="+", help="Fingerprint type to use [DL, circular, torsions, MACCS]", default=["DL"])
     parser.add_argument('--turbo', action="store_true", help="Run similarity for your reference structure and N most similar neighbours")
     parser.add_argument('--neighbours', type=int, help="Number of neighbours in turbo search. Ignored if not flag --turbo")
+    parser.add_argument('--analysis_dataset', action="store_true", help="Retrieve the similarity distribution of your dataset")
+    parser.add_argument('--test', action="store_true", help="Whether to run test or not")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Find analogs to a query molecule on your private database')
     add_args(parser)
     args = parser.parse_args()
     query_database(args.database, args.molecules, n_structs=args.n, most_similars=args.sb, 
-          combi_subsearch=args.combi_subsearch, substructure=args.substructure, output=args.output, treshold=args.tresh, avoid_repetition=args.avoid_repetition, hybrid=args.hybrid, fp_type=args.fp_type, turbo=args.turbo, neighbours=args.neighbours)
+          combi_subsearch=args.combi_subsearch, substructure=args.substructure, output=args.output, treshold=args.tresh, avoid_repetition=args.avoid_repetition, hybrid=args.hybrid, fp_type=args.fp_type, turbo=args.turbo, neighbours=args.neighbours, analysis_dataset=args.analysis_dataset, test=args.test)
