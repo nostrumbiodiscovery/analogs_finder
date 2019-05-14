@@ -1,7 +1,6 @@
 import numpy as np
 import umap
 import matplotlib.pyplot as plt
-import seaborn as sns
 import mpld3
 from mpld3 import plugins
 
