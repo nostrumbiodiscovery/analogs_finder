@@ -1,6 +1,30 @@
 From Command Line
 ==========================
 
+Analyze your dataset
+-----------------------
+
+The command below will output the tanimoto similarity distribution among
+all dataset and all fingerprints, at the same time will show a plot
+of the two first components of the PCA over the fingerprint space coloured
+by similarity to your query molecule. If we hover the points of the plot
+we can inspect the different structures of the molecules.
+
+::
+
+  python -m analogs_finder.main <database> <molecule_query> --analysis
+  python -m analogs_finder.main analogs_finder/examples/database.py analogs_finder/examples/substructre_1.sdf  --analysis
+ 
+
+ We find the similarity_hist_DL.png:
+
+IMAGE
+
+ And a firefox window opens retrieving the interactive PCA plot:
+
+IMAGE
+
+
 N most similar structures
 ---------------------------------------
 

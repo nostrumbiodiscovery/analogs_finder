@@ -20,6 +20,28 @@ Load your query molecule and your database
   molecules_db= Chem.SDMolSupplier(database)
   molecule_query = next(Chem.SDMolSupplier(qmolecule))
 
+Analyze your dataset
+-----------------------
+
+The command below will output the tanimoto similarity distribution among
+all dataset and all fingerprints, at the same time will show a plot
+of the two first components of the PCA over the fingerprint space coloured
+by similarity to your query molecule. If we hover the points of the plot
+we can inspect the different structures of the molecules.
+
+::
+  
+  from analogs_finder.analysis import analysis_dataset as an
+  an.main(molecule_query, molecules_db)
+ 
+
+ We find the similarity_hist_DL.png:
+
+IMAGE
+
+ And a firefox window opens retrieving the interactive PCA plot:
+
+IMAGE
 
 Most Similars n Molecules
 --------------------------------------
@@ -40,7 +62,7 @@ query molecule
   similars_no_duplicates = hp.remove_duplicates(similars)
   
   w = Chem.SDWriter(output)
-  for m in similars_no_duplicates: w.write(m)
+  for m in similars_no_duplicates: w.write(m.molecule)
 
 
 Tanimoto Similarity Search
@@ -58,7 +80,7 @@ than a desired treshold
   similars_no_duplicates = hp.remove_duplicates(similars)
   
   w = Chem.SDWriter(output)
-  for m in similars_no_duplicates: w.write(m)
+  for m in similars_no_duplicates: w.write(m.molecule)
 
 
 Substructure Search
@@ -76,7 +98,7 @@ with at least one of the substructures on you query sdf file
   similars_no_duplicates = hp.remove_duplicates(similars)
   
   w = Chem.SDWriter(output)
-  for m in similars_no_duplicates: w.write(m)
+  for m in similars_no_duplicates: w.write(m.molecule)
 
 Combinatorial Substructure Search
 ---------------------------------------
@@ -102,7 +124,7 @@ Finally, I will obtain structures with an amide and either a 5 or 6 memebr ring
   similars_no_duplicates = hp.remove_duplicates(similars)
   
   w = Chem.SDWriter(output)
-  for m in similars_no_duplicates: w.write(m)
+  for m in similars_no_duplicates: w.write(m.molecule)
 
 
 Similarity and Substructure hybrid search
@@ -117,10 +139,9 @@ than certain treshold that also contain certain substructure
   substructure_file = "analogs_finder/examples/substructre_3.sdf"
 
   similars = mt.most_similar_with_substructure(molecule_query, molecules_db, substructure_file, treshold=0.1)
-  similars_no_duplicates = hp.remove_duplicates(similars)
   
   w = Chem.SDWriter(output)
-  for m in similars_no_duplicates: w.write(m)
+  for m in similars_no_duplicates: w.write(m.molecule)
 
 
 
