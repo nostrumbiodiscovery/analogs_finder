@@ -45,7 +45,7 @@ before_script:
 
 script:
  # Run tests
- - python -m pytest --cov=./ tests/test_methods.py tests/test_helpers.py tests/test_fusions.py tests/test_fingerprints.py
+ - python -m pytest --cov=./ tests/test_methods.py tests/test_helpers.py tests/test_fusions.py tests/test_fingerprints.py tests/test_analysis.py
 
 after_script:
 - curl -s https://codecov.io/bash
