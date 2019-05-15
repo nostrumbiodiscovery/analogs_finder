@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 from tqdm import tqdm
 from rdkit import DataStructs
 from analogs_finder.analysis import plot as pt
@@ -9,6 +8,14 @@ from sklearn.decomposition import PCA
 
 
 def main(molecule_query, molecules_db, n_bins=100, fp_types=["DL", "circular", "MACCS"], test=None):
+    #Patch for travis import
+    if test:
+        import matplotlib
+        matplotlib.use('agg')
+        import matplotlib.pyplot as plt
+    else:
+        import matplotlib.pyplot as plt
+    #Analysis code
     for fp_type in fp_types:
         counts = []
         svg = [None] * 100
