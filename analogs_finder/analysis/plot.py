@@ -39,7 +39,7 @@ def UMAP_plot(X, Y, neighbors=5, min_dist=0.2, title="Chamical Space plot", outp
     ax.set_title(title)
     ax.legend()
     fig.savefig(output)
-    return embedding.T
+    return embedding
 
 def interactive_map(x, y, svgs, color=None):
     fig, ax = plt.subplots()
