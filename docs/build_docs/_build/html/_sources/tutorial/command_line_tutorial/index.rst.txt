@@ -13,16 +13,26 @@ we can inspect the different structures of the molecules.
 ::
 
   python -m analogs_finder.main <database> <molecule_query> --analysis
-  python -m analogs_finder.main analogs_finder/examples/database.py analogs_finder/examples/substructre_1.sdf  --analysis
+
+  #Use uniform manifold to plot the chemical space
+  python -m analogs_finder.main analogs_finder/examples/database.py analogs_finder/examples/substructre_1.sdf  --analysis --dm_type umap
+
+  #Use pca to plot the chemical space
+  python -m analogs_finder.main analogs_finder/examples/database.py analogs_finder/examples/substructre_1.sdf  --analysis --dm_type pca
  
 
- We find the similarity_hist_DL.png:
+We find the similarity_hist_DL.png:
 
-IMAGE
+.. figure:: ../../images/fp_dist.png
+    :scale: 80%
+    :align: center
 
- And a firefox window opens retrieving the interactive PCA plot:
+And a firefox window opens retrieving and interactive plot:
 
-IMAGE
+
+.. figure:: ../../images/chemical_space.png
+    :scale: 80%
+    :align: center
 
 
 N most similar structures

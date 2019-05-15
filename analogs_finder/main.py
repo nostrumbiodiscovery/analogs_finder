@@ -1,5 +1,4 @@
 from analogs_finder.analysis import analysis_dataset as an
-import matplotlib
 import argparse
 import sys
 from functools import partial
@@ -102,7 +101,7 @@ def add_args(parser):
     parser.add_argument('--neighbours', type=int, help="Number of neighbours in turbo search. Ignored if not flag --turbo")
     parser.add_argument('--analysis_dataset', action="store_true", help="Retrieve the similarity distribution of your dataset")
     parser.add_argument('--test', action="store_true", help="Whether to run test or not")
-    parser.add_argument('--dim_type', type=str, help="Dimensionallity reduction mothod to use when analyzing")
+    parser.add_argument('--dim_type', type=str, help="Dimensionallity reduction mothod to use when analyzing", default="pca")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Find analogs to a query molecule on your private database')

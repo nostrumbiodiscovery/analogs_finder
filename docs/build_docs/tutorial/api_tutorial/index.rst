@@ -32,16 +32,27 @@ we can inspect the different structures of the molecules.
 ::
   
   from analogs_finder.analysis import analysis_dataset as an
-  an.main(molecule_query, molecules_db)
+
+
+  #Use Uniform manifold to plot the chemical space
+  an.main(molecule_query, molecules_db, dim_type="umap")
+
+  #Use PCA to plot the chemical space
+  an.main(molecule_query, molecules_db, dim_type="pca")
  
 
- We find the similarity_hist_DL.png:
+We find the similarity_hist_DL.png:
 
-IMAGE
+.. figure:: ../../images/fp_dist.png
+    :scale: 80%
+    :align: center
 
- And a firefox window opens retrieving the interactive PCA plot:
+And a firefox window opens retrieving and interactive plot:
 
-IMAGE
+
+.. figure:: ../../images/chemical_space.png
+    :scale: 80%
+    :align: center
 
 Most Similars n Molecules
 --------------------------------------

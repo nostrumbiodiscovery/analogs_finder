@@ -198,17 +198,24 @@ all dataset and all fingerprints, at the same time will show a plot
 of the two first components of the PCA over the fingerprint space coloured
 by similarity to your query molecule. If we hover the points of the plot
 we can inspect the different structures of the molecules.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">analogs_finder.analysis</span> <span class="k">import</span> <span class="n">analysis_dataset</span> <span class="k">as</span> <span class="n">an</span>
- <span class="n">an</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">molecule_query</span><span class="p">,</span> <span class="n">molecules_db</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">analogs_finder.analysis</span> <span class="k">import</span> <span class="n">analysis_dataset</span> <span class="k">as</span> <span class="n">an</span>
 
 
-<span class="n">We</span> <span class="n">find</span> <span class="n">the</span> <span class="n">similarity_hist_DL</span><span class="o">.</span><span class="n">png</span><span class="p">:</span>
+<span class="c1">#Use Uniform manifold to plot the chemical space</span>
+<span class="n">an</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">molecule_query</span><span class="p">,</span> <span class="n">molecules_db</span><span class="p">,</span> <span class="n">dim_type</span><span class="o">=</span><span class="s2">&quot;umap&quot;</span><span class="p">)</span>
+
+<span class="c1">#Use PCA to plot the chemical space</span>
+<span class="n">an</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">molecule_query</span><span class="p">,</span> <span class="n">molecules_db</span><span class="p">,</span> <span class="n">dim_type</span><span class="o">=</span><span class="s2">&quot;pca&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>IMAGE</p>
-<blockquote>
-<div>And a firefox window opens retrieving the interactive PCA plot:</div></blockquote>
-<p>IMAGE</p>
+<p>We find the similarity_hist_DL.png:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../../_images/fp_dist.png"><img alt="../../_images/fp_dist.png" src="../../_images/fp_dist.png" style="width: 512.0px; height: 384.0px;" /></a>
+</div>
+<p>And a firefox window opens retrieving and interactive plot:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../../_images/chemical_space.png"><img alt="../../_images/chemical_space.png" src="../../_images/chemical_space.png" style="width: 598.4px; height: 383.2px;" /></a>
+</div>
 </div>
 <div class="section" id="most-similars-n-molecules">
 <h2>Most Similars n Molecules<a class="headerlink" href="#most-similars-n-molecules" title="Permalink to this headline">¶</a></h2>

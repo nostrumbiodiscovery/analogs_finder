@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 from tqdm import tqdm
 from rdkit import DataStructs
 from analogs_finder.analysis import plot as pt
@@ -8,14 +9,6 @@ from analogs_finder.analysis import dimensionallity as dm
 
 
 def main(molecule_query, molecules_db, n_bins=100, fp_types=["DL", "MACCS", "circular"], test=None, dim_type="umap"):
-
-    #Patch for travis import
-    if test:
-        import matplotlib
-        matplotlib.use('agg')
-        import matplotlib.pyplot as plt
-    else:
-        import matplotlib.pyplot as plt
 
     #Analysis code
     for fp_type in fp_types:
@@ -39,9 +32,10 @@ def main(molecule_query, molecules_db, n_bins=100, fp_types=["DL", "MACCS", "cir
                 svg[idx] = m.to_svg()
 
         #Plot similarity distribution
-        fig, ax = plt.subplots()
-        ax.hist(bins[1:], bins, weights=counts)
-        plt.savefig("similarity_hist_{}.png".format(fp_type))
+        if not test:
+            fig, ax = plt.subplots()
+            ax.hist(bins[1:], bins, weights=counts)
+            plt.savefig("similarity_hist_{}.png".format(fp_type))
 
         #Retrieve similarity distribution data
         values = np.vstack([bins[1:], counts]).T
