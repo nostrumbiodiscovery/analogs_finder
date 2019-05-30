@@ -1,4 +1,4 @@
-
+#!/bin/bash
 
 #Analysis
 python -m analogs_finder.main database.sdf substructre_1.sdf  --analysis --dim_type pca --test
