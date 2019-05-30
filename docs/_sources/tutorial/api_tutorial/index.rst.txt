@@ -164,11 +164,11 @@ Use different fingerprints
   molecule_query = next(Chem.SDMolSupplier("examples/query_molecule.sdf"))
   substructure_file = "examples/substructure.sdf"
 
-  similars_daylight = mt.search_most_similars(molecule_query, molecules_db, fp_type="DL")
-  similars_circular = mt.search_most_similars(molecule_query, molecules_db, fp_type="circular")
-  similars_torsions = mt.search_most_similars(molecule_query, molecules_db, fp_type="torsions")
-  similars_MACCS = mt.search_most_similars(molecule_query, molecules_db, fp_type="MACCS")
-  similars_pharm = mt.search_most_similars(molecule_query, molecules_db, fp_type="pharm")
+  similars_daylight = mt.search_most_similars(molecule_query, molecules_db, 2, fp_type="DL")
+  similars_circular = mt.search_most_similars(molecule_query, molecules_db, 2, fp_type="circular")
+  similars_torsions = mt.search_most_similars(molecule_query, molecules_db, 2, fp_type="torsions")
+  similars_MACCS = mt.search_most_similars(molecule_query, molecules_db, 2, fp_type="MACCS")
+  similars_pharm = mt.search_most_similars(molecule_query, molecules_db, 2, fp_type="pharm")
 
 
 Use all four fingerprints to query one database with different tresholds
@@ -191,4 +191,5 @@ For more details: https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10037
 
 ::
 
+ import analogs_finder.search_methods.fusion as fs
  turbo_similars = fs.turbo_similarity(molecule_query, molecules_db, neighbours=5, treshold=0.4, fp_type="circular") 
