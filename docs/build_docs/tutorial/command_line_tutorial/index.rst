@@ -15,10 +15,10 @@ we can inspect the different structures of the molecules.
   python -m analogs_finder.main <database> <molecule_query> --analysis
 
   #Use uniform manifold to plot the chemical space
-  python -m analogs_finder.main analogs_finder/examples/database.py analogs_finder/examples/substructre_1.sdf  --analysis --dm_type umap
+  python -m analogs_finder.main analogs_finder/examples/database.sdf analogs_finder/examples/substructre_1.sdf  --analysis --dim_type umap
 
   #Use pca to plot the chemical space
-  python -m analogs_finder.main analogs_finder/examples/database.py analogs_finder/examples/substructre_1.sdf  --analysis --dm_type pca
+  python -m analogs_finder.main analogs_finder/examples/database.sdf analogs_finder/examples/substructre_1.sdf  --analysis --dim_type pca
  
 
 We find the similarity_hist_DL.png:
@@ -45,7 +45,7 @@ N most similar structures
 
      python -m analogs_finder.mainpy <database (sdf)> <query_molecule (sdf)> --sb --n <number of output structs> --output <outputname>
 
-     python -m analogs_finder.main analogs_finder/examples/database.py analogs_finder/examples/substructre_1.sdf  --most_similars --n 20 --output most_similars.sdf
+     python -m analogs_finder.main analogs_finder/examples/database.sdf analogs_finder/examples/substructre_1.sdf  --sb --n 20 --output most_similars.sdf
 
 
 
@@ -59,7 +59,7 @@ Tanimoto similarity search
 
        python -m analogs_finder.main <database (sdf)> <query_molecule (sdf)> --treshold tanimoto_treshold --output <outputname>
 
-       python -m analogs_finder.main analogs_finder/examples/actives_final.sdf  analogs_finder/examples/substructre_1.sdf --output most_similars.sdf --tresh 0.7
+       python -m analogs_finder.main analogs_finder/examples/database.sdf  analogs_finder/examples/substructre_1.sdf --output most_similars.sdf --tresh 0.7
 
 
 
@@ -72,7 +72,7 @@ Search for  one or more substructure
 
        python -m analogs_finder.main <database (sdf)> <substructure_moleculeS (sdf with several entries (substructures)> --substructure --output <outputname>
 
-       python analogs_finder.main analogs_finder/examples/actives_final.sdf analogs_finder/examples/substructre_1.sdf --output most_similars.sdf --substructure
+       python -m analogs_finder.main analogs_finder/examples/database.sdf analogs_finder/examples/substructre_1.sdf --output most_similars.sdf --substructure
 
 
 
@@ -85,7 +85,7 @@ Search for at least one of the substructures in each sdf file
 
        python -m analogs_finder.main <database (sdf)> <substructure_moleculeS (sdf with several entries (substructures)> --combi_subsearch --output <outputname>
 
-       python analogs_finder.main analogs_finder/examples/actives_final.sdf analogs_finder/examples/substructre_*.sdf --output most_similars.sdf --combi_subsearch
+       python -m analogs_finder.main analogs_finder/examples/database.sdf analogs_finder/examples/substructre_*.sdf --output most_similars.sdf --combi_subsearch
 
 
 
@@ -99,7 +99,7 @@ Search for similarity and substructure
 
        python -m analogs_finder.main <database (sdf)> <query_molecule (sdf with several entries (substructures)>  --output <outputname> --hybrid <substructure sdf file>
 
-       python analogs_finder.main analogs_finder/examples/actives_final.sdf analogs_finder/examples/query_mol.sdf --output most_similars.sdf --hybrid analogs_finder/examples/substructure_1.sdf
+       python -m analogs_finder.main analogs_finder/examples/database.sdf analogs_finder/examples/substructure_2.sdf --output most_similars.sdf --hybrid analogs_finder/examples/substructure_1.sdf
 
 
 
@@ -111,7 +111,7 @@ Change fingerprint type
 
        python -m analogs_finder.main <database (sdf)> <query_molecule (sdf with several entries (substructures)>  --output <outputname> --hybrid <substructure sdf file> --fp_type [ DL, circular, MACCS, torsions, pharm]
 
-       python analogs_finder.main analogs_finder/examples/actives_final.sdf analogs_finder/examples/query_mol.sdf --output most_similars.sdf --hybrid analogs_finder/examples/substructure_1.sdf --fp_type circular
+       python -m analogs_finder.main analogs_finder/examples/database.sdf analogs_finder/examples/substructre_2.sdf --output most_similars.sdf --hybrid analogs_finder/examples/substructure_1.sdf --fp_type circular
 
 
 Use all fingerprints in one job with different tresholds
