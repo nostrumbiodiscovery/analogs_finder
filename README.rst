@@ -13,7 +13,7 @@ Analogs Finder
 .. image:: https://img.shields.io/github/commit-activity/m/NostrumBioDiscovery/analogs_finder.svg
        :target: https://anaconda.org/nostrumbiodiscovery/analogs_finder
 
-.. image::https://codecov.io/gh/NostrumBioDiscovery/analogs_finder/branch/master/graph/badge.svg
+.. image:: https://codecov.io/gh/NostrumBioDiscovery/analogs_finder/branch/master/graph/badge.svg
        :target: https://anaconda.org/nostrumbiodiscovery/analogs_finder
 
 Description
