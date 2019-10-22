@@ -1,4 +1,5 @@
 from analogs_finder.analysis import analysis_dataset as an
+import types
 import argparse
 import sys
 from functools import partial
@@ -11,12 +12,12 @@ from rdkit.Chem.Fingerprints import FingerprintMols
 from multiprocessing import Pool
 from analogs_finder.search_methods import methods as mt
 from analogs_finder.search_methods import fusion as fs
+from analogs_finder.search_methods import helpers as hpm
 from analogs_finder.helpers import helpers as hp
 
 
 
-def query_database(database, molecules, n_structs=500, combi_subsearch=False, most_similars=False, substructure=False, output="similars.sdf", hybrid=None, treshold=0.7, avoid_repetition=False, fp_type="DL", turbo=False, neighbours=5, analysis_dataset=False, test=False, dim_type="pca"):
-
+def query_database(database, molecules, n_structs=500, combi_subsearch=False, most_similars=False, substructure=False, output="similars.sdf", hybrid=None, treshold=0.7, avoid_repetition=False, fp_type="DL", turbo=False, neighbours=5, analysis_dataset=False, test=False, dim_type="pca", atoms_to_grow=[], atoms_to_avoid=[]):
     assert type(database) == str, "database must be a unique sdf file"
     assert type(molecules) == list, "query molecule must be a list of a single or multiple sdf files"
 
@@ -70,12 +71,36 @@ def query_database(database, molecules, n_structs=500, combi_subsearch=False, mo
         
 
     if mol_most_similars:
+        
+        #POSTPROCESSING!!
+
+        mol_most_similars = list(mol_most_similars)
+        try:
+            mols_after_filter = list(mol_most_similars); m_ref= [ m for m in molecule_query][0]
+        except TypeError:
+            mols_after_filter = list(mol_most_similars); m_ref= molecule_query
+
         if avoid_repetition:
             #Broken
             mol_most_similars = hp.remove_duplicates(mol_most_similars)
+        if any(atoms_to_grow):
+            coords_grow, neighbors_grow, indexes_grow = hpm.retrieve_atom_info(m_ref, atoms_to_grow)
+        if any(atoms_to_avoid):
+            coords_avoid, neighbors_avoid, indexes_avoid = hpm.retrieve_atom_info(m_ref, atoms_to_avoid)
+        for m in reversed(mols_after_filter):
+            if any(atoms_to_grow):
+                if hpm.is_bonded(m_ref, m.molecule, atoms_to_grow, coords_grow, neighbors_grow, indexes_grow):
+                    mols_after_filter.remove(m)
+                    continue
+            if any(atoms_to_avoid):
+                if hpm.is_not_bonded(m_ref, m.molecule, atoms_to_avoid, coords_avoid, neighbors_avoid, indexes_avoid):
+                    mols_after_filter.remove(m)
+                    continue
+
+
         w = Chem.SDWriter(output)
         n_mol_found = 0
-        for m in mol_most_similars: 
+        for m in mols_after_filter: 
             w.write(m.molecule)
             n_mol_found += 1
         print("Number of found molecules {}".format(n_mol_found))
@@ -102,10 +127,12 @@ def add_args(parser):
     parser.add_argument('--analysis_dataset', action="store_true", help="Retrieve the similarity distribution of your dataset")
     parser.add_argument('--test', action="store_true", help="Whether to run test or not")
     parser.add_argument('--dim_type', type=str, help="Dimensionallity reduction mothod to use when analyzing", default="pca")
+    parser.add_argument('--atoms_to_grow', nargs="+", help="Atoms you want to grow towards", default=[])
+    parser.add_argument('--atoms_to_avoid', nargs="+", help="Atoms you want to avoid growing to", default=[])
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Find analogs to a query molecule on your private database')
     add_args(parser)
     args = parser.parse_args()
     query_database(args.database, args.molecules, n_structs=args.n, most_similars=args.sb, 
-          combi_subsearch=args.combi_subsearch, substructure=args.substructure, output=args.output, treshold=args.tresh, avoid_repetition=args.avoid_repetition, hybrid=args.hybrid, fp_type=args.fp_type, turbo=args.turbo, neighbours=args.neighbours, analysis_dataset=args.analysis_dataset, test=args.test, dim_type=args.dim_type)
+          combi_subsearch=args.combi_subsearch, substructure=args.substructure, output=args.output, treshold=args.tresh, avoid_repetition=args.avoid_repetition, hybrid=args.hybrid, fp_type=args.fp_type, turbo=args.turbo, neighbours=args.neighbours, analysis_dataset=args.analysis_dataset, test=args.test, dim_type=args.dim_type, atoms_to_grow=args.atoms_to_grow, atoms_to_avoid=args.atoms_to_avoid)

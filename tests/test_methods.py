@@ -8,6 +8,9 @@ RESULT_TRESH=1
 RESULT_COMBI_SEARCH=2
 RESULT_SIMILAR=4
 RESULT_SUBSTRUCTURE=2
+RESULT_SUBSTRUCTURE_ATOMS_TO_GROW=1
+RESULT_SUBSTRUCTURE_ATOMS_TO_AVOID=0
+RESULT_SUBSTRUCTURE_ATOMS_TO_AVOID2=1
 RESULT_HYBRID=2
 
 MOLECULE = [os.path.join(DIR, "data/substructre_1.sdf"), ]
@@ -30,6 +33,18 @@ def test_similar(molecule=MOLECULE, db=DB, result=RESULT_SIMILAR):
 
 def test_substructure(molecule=MOLECULE, db=DB, result=RESULT_SUBSTRUCTURE):
     output = an.query_database(db, molecule, substructure=True)
+    assert result == output
+
+def test_substructure_atom_to_grow(molecule=MOLECULE, db=DB, result=RESULT_SUBSTRUCTURE_ATOMS_TO_GROW):
+    output = an.query_database(db, molecule, substructure=True, atoms_to_grow=[1])
+    assert result == output
+
+def test_substructure_atom_to_avoid(molecule=MOLECULE, db=DB, result=RESULT_SUBSTRUCTURE_ATOMS_TO_AVOID):
+    output = an.query_database(db, molecule, substructure=True, atoms_to_avoid=[7])
+    assert result == output
+
+def test_substructure_atom_to_avoidi_2(molecule=MOLECULE, db=DB, result=RESULT_SUBSTRUCTURE_ATOMS_TO_AVOID2):
+    output = an.query_database(db, molecule, substructure=True, atoms_to_avoid=[4])
     assert result == output
 
 def test_hybrid(molecule=MOLECULE, db=DB, substructures=SUBSTRUCTURE, treshold=0.1, result=RESULT_HYBRID):
