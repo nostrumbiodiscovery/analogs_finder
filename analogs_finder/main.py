@@ -40,7 +40,7 @@ def query_database(database, molecules, n_structs=500, combi_subsearch=False, mo
 
     # Load query molecule
     molecule_query = ld.load_query_molecule(molecules, most_similars, turbo,
-            combi_subsearch, substructure, hybrid, treshold, fp_type) 
+            combi_subsearch, substructure, hybrid, treshold, fp_type, only_postfilter) 
 
     # Load method to use
     mol_most_similars = ld.load_method_to_use(most_similars, turbo, substructure, combi_subsearch,
@@ -53,14 +53,14 @@ def query_database(database, molecules, n_structs=500, combi_subsearch=False, mo
 
         #Write molecules before filtering
         n_mol_found_before_filter = hp.molecules_to_sdf(mol_most_similars, "before_filter_" + output)
-        print("Number of found molecules {}".format(n_mol_found_before_filter))
+        print("Number of found molecules {} before filter".format(n_mol_found_before_filter))
 
         #Filter molecules
         mols_after_filter = pt.postfilter_mols(molecule_query, mol_most_similars, atoms_to_grow, atoms_to_avoid, avoid_repetition)
 
         #Write molecules after filtering
         n_mol_found_after_filter = hp.molecules_to_sdf(mols_after_filter, output)
-        print("Number of found molecules {}".format(n_mol_found_after_filter))
+        print("Number of found molecules {} after filter".format(n_mol_found_after_filter))
         #p = Pool(processes=20)
         #data = p.map(partial(search_most_similars, molecule_query=molecule_query, n_structs=n_structs), molecules_db) 
     return n_mol_found_after_filter
@@ -83,8 +83,8 @@ def add_args(parser):
     parser.add_argument('--analysis_dataset', action="store_true", help="Retrieve the similarity distribution of your dataset")
     parser.add_argument('--test', action="store_true", help="Whether to run test or not")
     parser.add_argument('--dim_type', type=str, help="Dimensionallity reduction mothod to use when analyzing", default="pca")
-    parser.add_argument('--atoms_to_grow', nargs="+", help="Atoms you want to grow towards", default=[])
-    parser.add_argument('--atoms_to_avoid', nargs="+", help="Atoms you want to avoid growing to", default=[])
+    parser.add_argument('--atoms_to_grow', nargs="+", type=int, help="Atoms you want to grow towards", default=[])
+    parser.add_argument('--atoms_to_avoid', nargs="+", type=int, help="Atoms you want to avoid growing to", default=[])
     parser.add_argument('--only_postfilter', action="store_true", help="Postfilter results from a previous analog search")
 
 if __name__ == "__main__":

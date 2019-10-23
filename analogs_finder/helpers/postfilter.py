@@ -5,9 +5,10 @@ import numpy as np
 def postfilter_mols(molecule_query, mol_most_similars, atoms_to_grow, atoms_to_avoid, avoid_repetition):
 
     try:
-        mols_after_filter = list(mol_most_similars); m_ref= [ m for m in molecule_query][0]
+        mols_after_filter = list(mol_most_similars); m_ref=[ m for m in molecule_query][0]
     except TypeError:
-        mols_after_filter = list(mol_most_similars); m_ref= molecule_query
+        mols_after_filter = list(mol_most_similars); m_ref=molecule_query
+    if isinstance(m_ref, str): m_ref = next(Chem.SDMolSupplier(molecule_query[0]))
 
     if avoid_repetition:
         #Broken
@@ -57,7 +58,6 @@ def is_bonded(m_ref, mol, atoms, coords, neighbors, indexes):
         try:
             rmsd = Chem.rdMolAlign.AlignMol(m_ref, mol)
         except RuntimeError:
-            print("Skipped")
             return False
     for coord_ref, neighbour_ref, index_ref in zip(coords, neighbors, indexes):
         coords = mol.GetConformer(0).GetPositions()
