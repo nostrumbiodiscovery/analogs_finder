@@ -74,13 +74,18 @@ def is_bonded(m_ref, mol, atoms, coords, neighbors, indexes):
 
 def is_not_bonded(m_ref, mol, atoms, coords, neighbors, indexes):
     valid = False
-    rmsd = Chem.rdMolAlign.AlignMol(m_ref, mol)
+    try:
+        rmsd = Chem.rdMolAlign.AlignMol(mol, m_ref)
+    except RuntimeError:
+        try:
+            rmsd = Chem.rdMolAlign.AlignMol(m_ref, mol)
+        except RuntimeError:
+            return False
     for coord_ref, neighbour_ref, index_ref in zip(coords, neighbors, indexes):
         coords = mol.GetConformer(0).GetPositions()
         distances_to_atoms_from_ref = [np.linalg.norm(coord_ref - coord) for coord in coords]
         idx = np.argmin(distances_to_atoms_from_ref)
         min_distance_to_atomref = distances_to_atoms_from_ref[idx]
-        print(min_distance_to_atomref)
         if distances_to_atoms_from_ref[idx] > 0.4:
             return False
         atom = [ atom for i, atom in enumerate(mol.GetAtoms()) if i == idx][0]
