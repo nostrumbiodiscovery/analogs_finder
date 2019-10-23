@@ -1,6 +1,7 @@
 from rdkit import Chem
 from analogs_finder.search_methods import methods as mt
 from analogs_finder.search_methods import fusion as fs
+from analogs_finder.search_methods import molecule as ml
 
 
 
@@ -24,9 +25,11 @@ def load_query_molecule(molecules, most_similars, turbo, combi_subsearch, substr
 
 def load_method_to_use(most_similars, turbo, substructure, combi_subsearch, 
         hybrid, fp_type, treshold, n_structs, molecule_query, molecules_db,
-        neighbours): 
+        neighbours, only_postfilter): 
     mol_most_similars = None
-    if most_similars:
+    if only_postfilter:
+        mol_most_similars = [ml.Molecule(m) for m in molecules_db if m]
+    elif most_similars:
         mol_most_similars  = mt.search_most_similars(molecule_query, molecules_db, n_structs, fp_type=fp_type)
     elif turbo:
         mol_most_similars = fs.turbo_similarity(molecule_query, molecules_db, neighbours=neighbours, treshold=treshold, fp_type=fp_type)
