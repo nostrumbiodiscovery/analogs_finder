@@ -16,7 +16,7 @@ from analogs_finder.helpers import helpers as hp
 
 
 
-def query_database(database, molecules, n_structs=500, combi_subsearch=False, most_similars=False, substructure=False, output="similars.sdf", hybrid=None, treshold=0.7, avoid_repetition=False, fp_type="DL", turbo=False, neighbours=5, analysis_dataset=False, test=False, dim_type="pca", atoms_to_grow=[], atoms_to_avoid=[]):
+def query_database(database, molecules, n_structs=500, combi_subsearch=False, most_similars=False, substructure=False, output="similars.sdf", hybrid=None, treshold=0.7, avoid_repetition=False, fp_type="DL", turbo=False, neighbours=5, analysis_dataset=False, test=False, dim_type="pca", atoms_to_grow=[], atoms_to_avoid=[], only_postfilter=False):
 
     #Initial checks
     assert type(database) == str, "database must be a unique sdf file"
@@ -44,7 +44,8 @@ def query_database(database, molecules, n_structs=500, combi_subsearch=False, mo
 
     # Load method to use
     mol_most_similars = ld.load_method_to_use(most_similars, turbo, substructure, combi_subsearch,
-        hybrid, fp_type, treshold, n_structs, molecule_query, molecules_db, neighbours)
+        hybrid, fp_type, treshold, n_structs, molecule_query, molecules_db, neighbours,
+        only_postfilter)
 
     #If output
     if mol_most_similars:
@@ -63,7 +64,6 @@ def query_database(database, molecules, n_structs=500, combi_subsearch=False, mo
         #p = Pool(processes=20)
         #data = p.map(partial(search_most_similars, molecule_query=molecule_query, n_structs=n_structs), molecules_db) 
     return n_mol_found_after_filter
-
 
 
 def add_args(parser):
@@ -85,10 +85,11 @@ def add_args(parser):
     parser.add_argument('--dim_type', type=str, help="Dimensionallity reduction mothod to use when analyzing", default="pca")
     parser.add_argument('--atoms_to_grow', nargs="+", help="Atoms you want to grow towards", default=[])
     parser.add_argument('--atoms_to_avoid', nargs="+", help="Atoms you want to avoid growing to", default=[])
+    parser.add_argument('--only_postfilter', action="store_true", help="Postfilter results from a previous analog search")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Find analogs to a query molecule on your private database')
     add_args(parser)
     args = parser.parse_args()
     query_database(args.database, args.molecules, n_structs=args.n, most_similars=args.sb, 
-          combi_subsearch=args.combi_subsearch, substructure=args.substructure, output=args.output, treshold=args.tresh, avoid_repetition=args.avoid_repetition, hybrid=args.hybrid, fp_type=args.fp_type, turbo=args.turbo, neighbours=args.neighbours, analysis_dataset=args.analysis_dataset, test=args.test, dim_type=args.dim_type, atoms_to_grow=args.atoms_to_grow, atoms_to_avoid=args.atoms_to_avoid)
+          combi_subsearch=args.combi_subsearch, substructure=args.substructure, output=args.output, treshold=args.tresh, avoid_repetition=args.avoid_repetition, hybrid=args.hybrid, fp_type=args.fp_type, turbo=args.turbo, neighbours=args.neighbours, analysis_dataset=args.analysis_dataset, test=args.test, dim_type=args.dim_type, atoms_to_grow=args.atoms_to_grow, atoms_to_avoid=args.atoms_to_avoid, only_postfilter=args.only_postfilter)

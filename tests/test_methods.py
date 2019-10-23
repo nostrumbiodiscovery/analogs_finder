@@ -12,6 +12,7 @@ RESULT_SUBSTRUCTURE_ATOMS_TO_GROW=1
 RESULT_SUBSTRUCTURE_ATOMS_TO_AVOID=0
 RESULT_SUBSTRUCTURE_ATOMS_TO_AVOID2=1
 RESULT_HYBRID=2
+RESULT_ONLYPOSTFILTER=5
 
 MOLECULE = [os.path.join(DIR, "data/substructre_1.sdf"), ]
 MOLECULES = glob.glob(os.path.join(DIR, "data/substructre_*.sdf"))
@@ -54,3 +55,8 @@ def test_hybrid(molecule=MOLECULE, db=DB, substructures=SUBSTRUCTURE, treshold=0
 def test_tresh_all_fps(molecule=MOLECULE, db=DB, result=RESULT_TRESH):
     output = an.query_database(db, molecule, treshold=[0.7, 0.4, 0.4, 0.27], fp_type=["DL", "circular", "torsions", "MACCS"])
     assert result == output
+
+def test_only_postfilter(molecule=MOLECULE, db=DB, result=RESULT_ONLYPOSTFILTER):
+    output = an.query_database(db, molecule, treshold=[0.7, 0.4, 0.4, 0.27], fp_type=["DL", "circular", "torsions", "MACCS"], only_postfilter=True)
+    assert result == output
+
