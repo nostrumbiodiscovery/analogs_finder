@@ -5,8 +5,10 @@ from analogs_finder.search_methods import molecule as ml
 
 
 
-def load_query_molecule(molecules, most_similars, turbo, combi_subsearch, substructure, hybrid, treshold, fp_type):
-    if most_similars:
+def load_query_molecule(molecules, most_similars, turbo, combi_subsearch, substructure, hybrid, treshold, fp_type, only_postfilter):
+    if only_postfilter:
+	molecule_query = next(Chem.SDMolSupplier(molecules[0]))
+    elif most_similars:
         molecule_query = next(Chem.SDMolSupplier(molecules[0]))
     elif turbo:
         molecule_query = next(Chem.SDMolSupplier(molecules[0]))
