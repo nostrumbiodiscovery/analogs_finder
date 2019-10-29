@@ -7,5 +7,5 @@ pip install .
 #Clean and build
 rm -r dist build analogs_finder.egg*
 python setup.py sdist
-twine upload  --repository-url https://test.pypi.org/legacy/ dist/*
+twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 ~                     
