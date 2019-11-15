@@ -4,6 +4,9 @@ Analogs Finder
 .. image:: https://travis-ci.com/NostrumBioDiscovery/analogs_finder.svg?branch=master
        :target: https://travis-ci.com/NostrumBioDiscovery/analogs_finder
 
+.. image:: https://img.shields.io/pypi/v/analogs_finder.svg
+       :target: https://pypi.org/project/analogs_finder/
+
 .. image:: https://anaconda.org/nostrumbiodiscovery/analogs_finder/badges/version.svg
        :target: https://anaconda.org/nostrumbiodiscovery/analogs_finder
 
