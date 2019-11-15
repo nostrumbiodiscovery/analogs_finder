@@ -27,7 +27,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Install via Conda
       run: |
-        conda install -c nostrumbiodiscovery analogs_finder
+        conda install -c conda-forge -c rdkit -c nostrumbiodiscovery analogs_finder --yes
     - name: Test with pytest
       run: |
         python -m pytest --cov=./ tests/test_methods.py tests/test_helpers.py tests/test_fusions.py tests/test_fingerprints.py tests/test_analysis.py
