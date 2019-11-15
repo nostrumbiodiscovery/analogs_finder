@@ -1,6 +1,6 @@
 package:
   name: analogs_finder
-  version: "1.2.0"
+  version: "1.2.1"
 
 about:
   home: https://github.com/danielSoler93/analogs_finder
@@ -22,9 +22,14 @@ requirements:
   run:
     # Base dependencies
     - python
+    - numpy
+    - matplotlib
+    - umap-learn
+    - jinja2
+    - scikit-learn
     - tqdm
-    - rdkit
     - mpld3
+    - rdkit
 
 test:
   imports:
