@@ -8,7 +8,7 @@ setuptools.setup(name='analogs_finder',
       author='Daniel Soler',
       author_email='daniel.soler@nostrumbiodiscovery.com',
       packages=setuptools.find_packages(),
-      install_requieres=["numpy", "matplotlib", "jinja2", "umap", "mpld3", "sklearn", "tqdm"],
+      install_requires=["numpy", "matplotlib", "jinja2", "umap", "mpld3", "sklearn", "tqdm"],
       classifiers=[
        "Programming Language :: Python :: 3",
        "License :: OSI Approved :: MIT License",
