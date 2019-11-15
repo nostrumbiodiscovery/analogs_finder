@@ -31,9 +31,19 @@ Analogs finder is a python based query-search engine for drug discovery. It allo
 Installation
 ##############
 
-1) conda install -c NostrumBioDiscovery analogs_finder
+From conda:
 
-2) export SCHRODINGER=/opt/schrodinger2019-1/
+       - conda install -c conda-forge -c rdkit -c nostrumbiodiscovery analogs_finder
+
+From Pypi:
+
+       - pip install analogs_finder
+       
+From source code:
+       
+       - git clone https://github.com/NostrumBioDiscovery/analogs_finder.git
+       - python setup.py install
+       
 
 To use as Python module
 ########################
