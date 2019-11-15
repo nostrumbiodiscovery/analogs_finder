@@ -3,7 +3,17 @@ ChangeLog
 
 Here we report all changes thorugh all different releases on: `MSM github <https://github.com/danielSoler93/analogs_finder/releases>`_
 
-1.0.0 - not yet there
+
+1.2.0
+---------
+
+   - Include postfilter module with:
+       - Keep molecules that were grown through certain atom
+       - Avoid molecules that were grown through certain atom
+       - Avoid duplicate molecules
+   - Fix minor bugs
+
+1.1.0
 ---------------------------------
 
     - Initial release with 5 query methods:
@@ -12,6 +22,3 @@ Here we report all changes thorugh all different releases on: `MSM github <https
         - Substructure matching
         - Several substructure matching
         - Similarity based with substructure matching
-
-    - And 1 rank method:
-        - Pharmacophore alignment (schrodinger need it)
