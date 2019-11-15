@@ -2,7 +2,7 @@ import setuptools
 
 
 setuptools.setup(name='analogs_finder',
-      version="1.1.0",
+      version="1.2.0",
       url = "https://github.com/nostrumbiodiscovery/analogs_finder", 
       description='Retrieve analogs given a query molecule and a database.',
       author='Daniel Soler',

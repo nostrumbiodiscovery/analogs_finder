@@ -1,7 +1,9 @@
 #Clean and reinstall requirements
+rm -r dist
 pip uninstall -r requirements.txt --yes
 pip uninstall analogs_finder --yes
 pip install cython numpy setuptools
+pip install -r requirements.txt
 pip install .
 
 #Clean and build

@@ -1,2 +1,7 @@
+numpy
+matplotlib
+umap
+jinja2
+sklearn
 tqdm
 mpld3

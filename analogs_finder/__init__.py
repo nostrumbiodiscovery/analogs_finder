@@ -17,4 +17,5 @@ __copyright__ = '2019, NostrumBioDiscovery'
 __url__ = 'https://github.com/danielSoler93'
 __title__ = 'AnalogFinder'
 __description__ = ('AnalogFinder: Given a query molecule and some database find analogs')
+__version__ = "1.2.0"
 
