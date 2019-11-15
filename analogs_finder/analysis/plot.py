@@ -20,7 +20,7 @@ def histogram(point, interval=[0,1], n_bins=10):
 def boxplot(X, title="Similarity box plot", output="box_plot.png"):
     fig1, ax1 = plt.subplots()
     ax1.set_title(title)
-    ax1.boxplot(data)
+    ax1.boxplot(X)
     fig1.savefig(output)
 
 
