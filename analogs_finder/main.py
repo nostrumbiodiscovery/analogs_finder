@@ -1,4 +1,5 @@
 from analogs_finder.analysis import analysis_dataset as an
+import types
 import argparse
 import sys
 from functools import partial
@@ -9,80 +10,60 @@ from rdkit import Chem
 from rdkit import DataStructs
 from rdkit.Chem.Fingerprints import FingerprintMols
 from multiprocessing import Pool
-from analogs_finder.search_methods import methods as mt
-from analogs_finder.search_methods import fusion as fs
+from analogs_finder.search_methods import loader as ld
+from analogs_finder.helpers import postfilter as pt
 from analogs_finder.helpers import helpers as hp
 
 
 
-def query_database(database, molecules, n_structs=500, combi_subsearch=False, most_similars=False, substructure=False, output="similars.sdf", hybrid=None, treshold=0.7, avoid_repetition=False, fp_type="DL", turbo=False, neighbours=5, analysis_dataset=False, test=False, dim_type="pca"):
+def query_database(database, molecules, n_structs=500, combi_subsearch=False, most_similars=False, substructure=False, output="similars.sdf", hybrid=None, treshold=0.7, avoid_repetition=False, fp_type="DL", turbo=False, neighbours=5, analysis_dataset=False, test=False, dim_type="pca", atoms_to_grow=[], atoms_to_avoid=[], only_postfilter=False):
 
+    #Initial checks
     assert type(database) == str, "database must be a unique sdf file"
     assert type(molecules) == list, "query molecule must be a list of a single or multiple sdf files"
 
+    # Set tanimoto threshold and fp type
     if type(treshold) == list and type(fp_type) == list:
         if len(treshold) == 1 and len(fp_type) == 1:
            treshold = treshold[0]
            fp_type = fp_type[0] 
 
-    # Database
+    # Load database
     molecules_db= Chem.SDMolSupplier(database)
 
-    #Previous Analysis
+    # Perform database analysis
     if analysis_dataset:
         print("Analysing dataset...")
         molecule_query = next(Chem.SDMolSupplier(molecules[0]))
         an.main(molecule_query, molecules_db, test=test, dim_type=dim_type)
         return
 
-    # Query Molecule
-    if most_similars:
-        molecule_query = next(Chem.SDMolSupplier(molecules[0]))
-    elif turbo:
-        molecule_query = next(Chem.SDMolSupplier(molecules[0]))
-    elif combi_subsearch:
-        molecule_query = molecules
-    elif substructure:
-        molecule_query = Chem.SDMolSupplier(molecules[0])
-    elif hybrid:
-        molecule_query = next(Chem.SDMolSupplier(molecules[0]))
-    elif type(treshold) == list and type(fp_type) == list:
-        molecule_query = next(Chem.SDMolSupplier(molecules[0]))
-    elif treshold:
-        molecule_query = next(Chem.SDMolSupplier(molecules[0]))
+    # Load query molecule
+    molecule_query = ld.load_query_molecule(molecules, most_similars, turbo,
+            combi_subsearch, substructure, hybrid, treshold, fp_type, only_postfilter) 
 
-    # Method to use
-    mol_most_similars = None
-    if most_similars:
-        mol_most_similars  = mt.search_most_similars(molecule_query, molecules_db, n_structs, fp_type=fp_type)
-    elif turbo:
-        mol_most_similars = fs.turbo_similarity(molecule_query, molecules_db, neighbours=neighbours, treshold=treshold, fp_type=fp_type)
-    elif substructure:
-        mol_most_similars  = mt.search_substructure(molecule_query, molecules_db)
-    elif combi_subsearch:
-        mol_most_similars = mt.combi_substructure_search(molecule_query, molecules_db) 
-    elif hybrid and treshold:
-        mol_most_similars = mt.most_similar_with_substructure(molecule_query, molecules_db, hybrid, treshold, fp_type=fp_type)
-    elif type(treshold) == list and type(fp_type) == list:
-        mol_most_similars = mt.search_similarity_tresh_several_fp(molecule_query, molecules_db, tresholds=treshold, fp_types=fp_type)
-    elif treshold:
-        mol_most_similars  = mt.search_similarity_tresh(molecule_query, molecules_db, treshold, fp_type=fp_type)
-        
+    # Load method to use
+    mol_most_similars = ld.load_method_to_use(most_similars, turbo, substructure, combi_subsearch,
+        hybrid, fp_type, treshold, n_structs, molecule_query, molecules_db, neighbours,
+        only_postfilter)
 
+    #If output
     if mol_most_similars:
-        if avoid_repetition:
-            #Broken
-            mol_most_similars = hp.remove_duplicates(mol_most_similars)
-        w = Chem.SDWriter(output)
-        n_mol_found = 0
-        for m in mol_most_similars: 
-            w.write(m.molecule)
-            n_mol_found += 1
-        print("Number of found molecules {}".format(n_mol_found))
+        mol_most_similars = list(mol_most_similars)
+
+        #Write molecules before filtering
+        n_mol_found_before_filter = hp.molecules_to_sdf(mol_most_similars, "before_filter_" + output)
+        print("Number of found molecules {} before filter".format(n_mol_found_before_filter))
+
+        #Filter molecules
+        mols_after_filter = pt.postfilter_mols(molecule_query, mol_most_similars, atoms_to_grow, atoms_to_avoid, avoid_repetition)
+
+        #Write molecules after filtering
+        n_mol_found_after_filter = hp.molecules_to_sdf(mols_after_filter, output)
+        print("Number of found molecules {} after filter".format(n_mol_found_after_filter))
         #p = Pool(processes=20)
         #data = p.map(partial(search_most_similars, molecule_query=molecule_query, n_structs=n_structs), molecules_db) 
-    return n_mol_found
-
+    return n_mol_found_after_filter
 
 
 def add_args(parser):
@@ -102,10 +83,13 @@ def add_args(parser):
     parser.add_argument('--analysis_dataset', action="store_true", help="Retrieve the similarity distribution of your dataset")
     parser.add_argument('--test', action="store_true", help="Whether to run test or not")
     parser.add_argument('--dim_type', type=str, help="Dimensionallity reduction mothod to use when analyzing", default="pca")
+    parser.add_argument('--atoms_to_grow', nargs="+", type=int, help="Atoms you want to grow towards", default=[])
+    parser.add_argument('--atoms_to_avoid', nargs="+", type=int, help="Atoms you want to avoid growing to", default=[])
+    parser.add_argument('--only_postfilter', action="store_true", help="Postfilter results from a previous analog search")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Find analogs to a query molecule on your private database')
     add_args(parser)
     args = parser.parse_args()
     query_database(args.database, args.molecules, n_structs=args.n, most_similars=args.sb, 
-          combi_subsearch=args.combi_subsearch, substructure=args.substructure, output=args.output, treshold=args.tresh, avoid_repetition=args.avoid_repetition, hybrid=args.hybrid, fp_type=args.fp_type, turbo=args.turbo, neighbours=args.neighbours, analysis_dataset=args.analysis_dataset, test=args.test, dim_type=args.dim_type)
+          combi_subsearch=args.combi_subsearch, substructure=args.substructure, output=args.output, treshold=args.tresh, avoid_repetition=args.avoid_repetition, hybrid=args.hybrid, fp_type=args.fp_type, turbo=args.turbo, neighbours=args.neighbours, analysis_dataset=args.analysis_dataset, test=args.test, dim_type=args.dim_type, atoms_to_grow=args.atoms_to_grow, atoms_to_avoid=args.atoms_to_avoid, only_postfilter=args.only_postfilter)

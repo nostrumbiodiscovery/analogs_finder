@@ -3,6 +3,7 @@ from rdkit import Chem
 import os
 import glob
 from analogs_finder.helpers import helpers as hp
+from analogs_finder.helpers import postfilter as pt
 from analogs_finder.search_methods import molecule as ml
 
 RESULT = 4
@@ -12,6 +13,6 @@ DB = os.path.join(DIR, "data/database.sdf")
 def test_duplicates(db=DB, result=RESULT):
     mols = Chem.SDMolSupplier(db)
     mols = [ml.Molecule(m) for m in mols]
-    output = hp.remove_duplicates(mols)
+    output = pt.remove_duplicates(mols)
     assert len(output) == result
 

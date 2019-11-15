@@ -6,7 +6,11 @@ From Conda (recommended)
 
 ::
 
- conda install -c NostrumBioDiscovery analogs_finder
+ conda create -n analogs_finder_env -c NostrumBioDiscovery -c conda-forge boost=1.68 --yes
+
+ conda activate analogs_finder_env
+
+ conda install -c NostrumBioDiscovery -c conda-forge analogs_finder
 
 
 From PyPi

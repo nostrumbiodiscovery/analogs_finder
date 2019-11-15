@@ -1,15 +1,14 @@
+from rdkit import Chem
 
 
 
-def remove_duplicates(molecules_duplicated):
-    names = []
-    mols_no_duplicates = []
-    for mol in molecules_duplicated:
-        name = mol.molecule.GetProp("_Name")
-        if name in names:
-            pass
-        else:
-            names.append(name)
-            mols_no_duplicates.append(mol)
-    return mols_no_duplicates
-           
+def molecules_to_sdf(molecules, output):
+    w = Chem.SDWriter(output)
+    n_mol_found = 0
+    for molecule in molecules: 
+        try:
+            w.write(molecule.molecule)
+        except AttributeError:
+            w.write(molecule)
+        n_mol_found += 1
+    return n_mol_found

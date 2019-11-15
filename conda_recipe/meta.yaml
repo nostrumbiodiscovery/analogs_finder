@@ -1,6 +1,6 @@
 package:
   name: analogs_finder
-  version: "1.0.0"
+  version: "1.1.0"
 
 about:
   home: https://github.com/danielSoler93/analogs_finder
@@ -17,13 +17,14 @@ build:
 
 requirements:
   host:
-    - python 3
+    - python
 
   run:
     # Base dependencies
-    - python 3
+    - python
     - tqdm
     - rdkit
+    - mpld3
 
 test:
   imports:

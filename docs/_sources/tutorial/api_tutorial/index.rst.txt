@@ -193,3 +193,37 @@ For more details: https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10037
 
  import analogs_finder.search_methods.fusion as fs
  turbo_similars = fs.turbo_similarity(molecule_query, molecules_db, neighbours=5, treshold=0.4, fp_type="circular") 
+
+PostFilter by:
+----------------
+
+
+To postfilter a previously done analog search provide the sdf of the previous analog search as the
+database followed by -only_postprocess. Here, we remove duplicates of the previous analog serch resut_search.sdf
+
+
+
+
+Position of growing
++++++++++++++++++++++++
+
+To only keep the molecules that have a radical growin in a specific initial atom (atom 2 for example) use the command below.
+To know the indexes of the atoms you can select them with maestro/pymol with the option of labeling atoms by index.
+
+::
+
+    python -m analogs_finder.main result_search.sdf substructre_1.sdf --only_postfilter --atom_to_grow 2
+
+It is also possible to sum them up. For intance, here we keep analogs grown by the atom index 2 **or** 4
+
+::
+
+    python -m analogs_finder.main result_search.sdf substructre_1.sdf --only_postfilter --atom_to_grow 2 4
+
+To keep analogs that have no radical in a specific atom use --atom_to_avoid. For example, next we keep all molecules
+that have no radical in the atom index 2 **and** 4
+
+
+::
+
+    python -m analogs_finder.main result_search.sdf substructre_1.sdf --only_postfilter --atom_to_avoid 2 4

@@ -17,34 +17,36 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="From Command Line" href="../command_line_tutorial/index.html" />
     <link rel="prev" title="Getting Started" href="../index.html" /> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -99,6 +101,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#use-different-fingerprints">Use different fingerprints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#use-all-four-fingerprints-to-query-one-database-with-different-tresholds">Use all four fingerprints to query one database with different tresholds</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#turbo-search-method">Turbo search method:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#postfilter-by">PostFilter by:</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#position-of-growing">Position of growing</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../command_line_tutorial/index.html">From Command Line</a></li>
@@ -214,7 +220,7 @@ we can inspect the different structures of the molecules.</p>
 </div>
 <p>And a firefox window opens retrieving and interactive plot:</p>
 <div class="figure align-center">
-<a class="reference internal image-reference" href="../../_images/chemical_space.png"><img alt="../../_images/chemical_space.png" src="../../_images/chemical_space.png" style="width: 598.4px; height: 383.2px;" /></a>
+<a class="reference internal image-reference" href="../../_images/chemical_space.png"><img alt="../../_images/chemical_space.png" src="../../_images/chemical_space.png" style="width: 598.4px; height: 383.20000000000005px;" /></a>
 </div>
 </div>
 <div class="section" id="most-similars-n-molecules">
@@ -334,6 +340,28 @@ the reference molecule and theses neghbours, finally performing data fusion.</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="postfilter-by">
+<h2>PostFilter by:<a class="headerlink" href="#postfilter-by" title="Permalink to this headline">¶</a></h2>
+<p>To postfilter a previously done analog search provide the sdf of the previous analog search as the
+database followed by -only_postprocess. Here, we remove duplicates of the previous analog serch resut_search.sdf</p>
+<div class="section" id="position-of-growing">
+<h3>Position of growing<a class="headerlink" href="#position-of-growing" title="Permalink to this headline">¶</a></h3>
+<p>To only keep the molecules that have a radical growin in a specific initial atom (atom 2 for example) use the command below.
+To know the indexes of the atoms you can select them with maestro/pymol with the option of labeling atoms by index.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">analogs_finder</span><span class="o">.</span><span class="n">main</span> <span class="n">result_search</span><span class="o">.</span><span class="n">sdf</span> <span class="n">substructre_1</span><span class="o">.</span><span class="n">sdf</span> <span class="o">--</span><span class="n">only_postfilter</span> <span class="o">--</span><span class="n">atom_to_grow</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>It is also possible to sum them up. For intance, here we keep analogs grown by the atom index 2 <strong>or</strong> 4</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">analogs_finder</span><span class="o">.</span><span class="n">main</span> <span class="n">result_search</span><span class="o">.</span><span class="n">sdf</span> <span class="n">substructre_1</span><span class="o">.</span><span class="n">sdf</span> <span class="o">--</span><span class="n">only_postfilter</span> <span class="o">--</span><span class="n">atom_to_grow</span> <span class="mi">2</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>To keep analogs that have no radical in a specific atom use –atom_to_avoid. For example, next we keep all molecules
+that have no radical in the atom index 2 <strong>and</strong> 4</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">analogs_finder</span><span class="o">.</span><span class="n">main</span> <span class="n">result_search</span><span class="o">.</span><span class="n">sdf</span> <span class="n">substructre_1</span><span class="o">.</span><span class="n">sdf</span> <span class="o">--</span><span class="n">only_postfilter</span> <span class="o">--</span><span class="n">atom_to_avoid</span> <span class="mi">2</span> <span class="mi">4</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 
 
@@ -347,7 +375,7 @@ the reference molecule and theses neghbours, finally performing data fusion.</p>
         <a href="../command_line_tutorial/index.html" class="btn btn-neutral float-right" title="From Command Line" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../index.html" class="btn btn-neutral" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../index.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -373,26 +401,16 @@ the reference molecule and theses neghbours, finally performing data fusion.</p>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
