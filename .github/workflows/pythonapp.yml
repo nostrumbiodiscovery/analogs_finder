@@ -26,7 +26,7 @@ jobs:
         pip install analogs-finder
     - name: Install rdkit via conda
       run: |
-        conda install rdkit
+        conda install -c rdkit rdkit
     - name: Test with pytest
       run: |
         python -m pytest --cov=./ tests/test_methods.py tests/test_helpers.py tests/test_fusions.py tests/test_fingerprints.py tests/test_analysis.py
