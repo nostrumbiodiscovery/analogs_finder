@@ -1,4 +1,4 @@
-name: Analogs Finder
+name: Analogs Finder from Pypi
 on: [push]
 
 jobs:
